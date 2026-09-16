@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.1.2] - 2026-09-17
+
+Cross-domain patch driven by a blind test against current Japanese mobile-carrier contract and plan documentation.
+
+### Added
+
+- `Document Stack / Document Function` analysis
+- `Claim Decomposition / Semantic Dimensions`
+- explicit contract-subscriber cohort handling
+- normalized-dimension rule for cross-provider comparisons
+- distinction between fixed-volume throttling and congestion/fair-use controls
+- `modules/telecom-contracts.md`
+- `examples/mobile-unlimited-jp-4carriers.md`
+- `tests/TEST_REPORT_v0.1.1-telecom.md`
+
+### Changed
+
+- Evidence Identity Tuple now records document type, function, effective range, applicability and cohort
+- Premise Validation now checks semantic-dimension equivalence, not only object/time equivalence
+- Mandatory output can include Document Stack and Claim Dimensions
+- Agent prompt now prevents treating product pages as complete contract definitions
+- Stop Conditions require document-function analysis where multiple documents jointly define a rule or contract
+
+### Reason
+
+The four-carrier telecom test showed that a source can be official and still have a different function from another official source. It also showed that labels such as `unlimited` are too coarse to compare directly: billing, total volume, high-speed volume, speed control, tethering, geography and measurement window can vary independently.
+
+---
+
 ## [0.1.1] - 2026-09-17
 
 Validation-driven patch after the first regression and cross-domain tests.
