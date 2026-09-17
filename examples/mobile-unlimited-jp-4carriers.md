@@ -17,9 +17,9 @@ Skill: `institutional-forensics` + `modules/telecom-contracts.md`
 - SoftBank: テイガク無制限
 - 楽天モバイル: Rakuten最強プラン
 
-## STEP -1 Premise Validation
+## Premise status
 
-Premise: **Established, but requires semantic decomposition.**
+**Established, but requires semantic decomposition.**
 
 4社はいずれも公式ページで無制限系の表現を使用している。同時に条件付き通信制御を公式に開示している。
 
@@ -138,13 +138,3 @@ Confidence: Confirmed for the structural finding.
 - 各社の契約文書に、商品表示より強い「いかなる条件でも速度・量を制限しない」とする条項が存在する
 - 現行提供条件書が上記商品ページの条件を否定している
 - 比較対象プラン・加入時期が異なり、別契約条件が適用される
-
-## Skill improvement triggered by this case
-
-この試験からv0.1.2で以下を追加する。
-
-1. `Document Stack / Document Function`
-2. `Claim Decomposition / Claim Dimensions`
-3. 契約者cohort / 가입時期の確認
-4. cross-provider比較ではlabelではなくdimensionを比較
-5. 「固定容量制限」と「ネットワーク制御」の分離
