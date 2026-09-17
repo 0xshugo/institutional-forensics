@@ -31,23 +31,7 @@ Only expand into exceptions, scope/cohort, timeline/source drift, operation/enfo
 
 ## Definition of Done
 
-A result is acceptable only when:
-
-```text
-[ ] Premise status exists
-[ ] major sources have issuer + function
-[ ] object granularity is aligned or mismatch is explicit
-[ ] valid_at exists when time/version matters
-[ ] ambiguous claims are dimensionally decomposed
-[ ] Confirmed is not based on inference-only evidence
-[ ] at least one falsification condition exists
-[ ] decisive negative/exclusive claims were separately checked
-[ ] current state was not promoted to permanence without explicit evidence
-[ ] neighboring dimensions are not conflated
-[ ] Unresolved remains an allowed outcome
-```
-
-Validator: `tests/VALIDATOR_CHECKLIST.md`
+A result is acceptable only when every item in the canonical checklist passes: [`tests/VALIDATOR_CHECKLIST.md`](tests/VALIDATOR_CHECKLIST.md).
 
 ## Why this exists
 
