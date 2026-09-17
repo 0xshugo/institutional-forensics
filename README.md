@@ -2,7 +2,7 @@
 
 Evidence-first Skill for investigating contradictions in rules, contracts, policies, specifications, and real-world operations.
 
-**Version:** v0.1.4 — experimental
+**Version:** v0.1.5 — experimental
 
 > Verify the contradiction before explaining it.
 
@@ -41,6 +41,9 @@ A result is acceptable only when:
 [ ] ambiguous claims are dimensionally decomposed
 [ ] Confirmed is not based on inference-only evidence
 [ ] at least one falsification condition exists
+[ ] decisive negative/exclusive claims were separately checked
+[ ] current state was not promoted to permanence without explicit evidence
+[ ] neighboring dimensions are not conflated
 [ ] Unresolved remains an allowed outcome
 ```
 
@@ -59,7 +62,9 @@ A later blind test on Japanese mobile-carrier contracts exposed two more weaknes
 
 That produced Document Function and Claim Dimensions.
 
-v0.1.3 focuses on execution cost and failure detection: **shorter core, stricter validator**.
+The v0.1.4 sample expansion then exposed a different failure mode: **a correct refutation can still produce a false replacement explanation.** The AppleCare sample incorrectly claimed that sales law contained no corresponding one-year rule; Civil Code Article 566 provides a one-year notice period for certain lack-of-conformity claims. The Google Photos sample also promoted a current quota rule into an unsupported “permanent” guarantee.
+
+v0.1.5 keeps the same short fast path and strengthens Falsification instead of adding another mandatory step.
 
 ## Evidence minimum
 
@@ -104,7 +109,8 @@ field
     ├── VALIDATOR_CHECKLIST.md
     ├── TEST_REPORT_v0.1.0.md
     ├── TEST_REPORT_v0.1.1-telecom.md
-    └── TEST_REPORT_v0.1.2-regression.md
+    ├── TEST_REPORT_v0.1.2-regression.md
+    └── TEST_REPORT_v0.1.5-corrections.md
 ```
 
 ## Modules
@@ -127,8 +133,8 @@ Good/real investigation cases:
 
 - `examples/kusunokamicho-2-1-2.md` — premise / granularity / address system
 - `examples/mobile-unlimited-jp-4carriers.md` — document function / unlimited decomposition
-- `examples/applecare-warranty-layers.md` — warranty layers / statutory vs commercial / JP-EU-US / timeline drift (the investigation invalidated its own initial premise)
-- `examples/google-photos-unlimited.md` — cohort coexistence / legacy grandfathering / label renaming / drifting announcement URLs
+- `examples/applecare-warranty-layers.md` — statutory remedy vs notice period vs limitation period vs commercial warranty; includes a documented self-correction
+- `examples/google-photos-unlimited.md` — cohort coexistence / quota counting vs retention / current-state vs permanence
 
 Compact failure examples:
 
@@ -145,8 +151,8 @@ Tested so far:
 3. bicycle roadway rule vs sidewalk exceptions and enforcement
 4. Japanese four-carrier telecom-contract blind test
 5. telecom regression after Document Function / Claim Dimensions changes
-6. warranty-layer case: AppleCare+ JP/US terms + Japanese Civil Code / Consumer Contract Act / EU directive (consumer-law domain, first pass; invalidated its own initial hypothesis)
-7. Google Photos storage sunset: cohort coexistence and legacy grandfathering (platform-terms domain)
+6. warranty-layer case: AppleCare + Japanese Civil Code / EU directive; v0.1.4 factual overreach corrected in v0.1.5
+7. Google Photos storage sunset: cohort coexistence; permanence overreach corrected in v0.1.5
 
 ## Contribution direction
 
