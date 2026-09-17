@@ -1,6 +1,6 @@
 # Institutional Forensics Validator Checklist
 
-Version: v0.1.5
+Version: v0.1.6
 
 Use this checklist before accepting an investigation result.
 

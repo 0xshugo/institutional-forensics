@@ -321,6 +321,8 @@ Operation / enforcement
 [ ] Unresolvedを許容している
 ```
 
+完全なチェックリストと失敗時ポリシー: `tests/VALIDATOR_CHECKLIST.md`
+
 1つでも重大な欠落があれば、Confidenceを下げるか調査を追加する。
 
 ---
