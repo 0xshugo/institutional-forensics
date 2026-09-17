@@ -1,47 +1,87 @@
 # Institutional Forensics
 
-Evidence-first skill for investigating apparently contradictory rules, exceptions, contracts, legacy behavior, and real-world operations.
+Evidence-first Skill for investigating contradictions in rules, contracts, policies, specifications, and real-world operations.
 
-**Version:** v0.1.2 — experimental
+**Version:** v0.1.3 — experimental
 
-## What it does
+> Verify the contradiction before explaining it.
 
-制度・規則・契約・仕様の「なぜこうなっている？」を、まず前提そのものから検証し、必要に応じて文書の役割と言葉の意味まで分解して追跡します。
+## When to use it
+
+Use this Skill when something looks inconsistent:
+
+- a rule says one thing, operations do another
+- two official sources disagree
+- a contract says “unlimited”, “free”, or “guaranteed” but conditions exist
+- old and new customers appear to have different treatment
+- the same number or label appears to mean different things
+
+## Fast path
+
+The mandatory path is intentionally short:
 
 ```text
-Premise Validation
-  ↓
-Entity / Object Granularity
-  ↓
-Document Stack / Function
-  ↓
-Claim Dimensions
-  ↓
-General Rule
-  ↓
-Exception
-  ↓
-Scope / Cohort / Version
-  ↓
-Timeline + Source Drift
-  ↓
-Actual Operation
-  ↓
-Falsification
-  ↓
-Evidence-backed explanation
+Premise
+→ Document Function
+→ Claim Dimensions
+→ Falsification
 ```
 
-対象例:
+Only expand into exceptions, scope/cohort, timeline/source drift, operation/enforcement, legacy, or implementation issues when needed.
 
-- 行政制度
-- 住所・地番・住居表示
-- 料金・契約・通信約款
-- 税制・補助制度
-- 標準・規格
-- 公共調達
-- レガシーIT仕様
-- 組織内ルール
+## Definition of Done
+
+A result is acceptable only when:
+
+```text
+[ ] Premise status exists
+[ ] major sources have issuer + function
+[ ] object granularity is aligned or mismatch is explicit
+[ ] valid_at exists when time/version matters
+[ ] ambiguous claims are dimensionally decomposed
+[ ] Confirmed is not based on inference-only evidence
+[ ] at least one falsification condition exists
+[ ] Unresolved remains an allowed outcome
+```
+
+Validator: `tests/VALIDATOR_CHECKLIST.md`
+
+## Why this exists
+
+The Skill started from a Japanese address anomaly and immediately failed its first regression test: it could produce a legally plausible explanation before proving that the anomaly itself was real at the same object granularity.
+
+That produced mandatory Premise Validation.
+
+A later blind test on Japanese mobile-carrier contracts exposed two more weaknesses:
+
+- official documents have different functions
+- labels such as “unlimited” must be decomposed into independent dimensions
+
+That produced Document Function and Claim Dimensions.
+
+v0.1.3 focuses on execution cost and failure detection: **shorter core, stricter validator**.
+
+## Evidence minimum
+
+Each major source needs only five required fields:
+
+```text
+issuer
+function
+object_level
+valid_at
+source
+```
+
+Optional when needed:
+
+```text
+version
+published
+applies_to
+status
+field
+```
 
 ## Repository structure
 
@@ -56,123 +96,69 @@ Evidence-backed explanation
 │   └── telecom-contracts.md
 ├── examples/
 │   ├── kusunokamicho-2-1-2.md
-│   └── mobile-unlimited-jp-4carriers.md
+│   ├── mobile-unlimited-jp-4carriers.md
+│   └── anti-patterns.md
 └── tests/
+    ├── VALIDATOR_CHECKLIST.md
     ├── TEST_REPORT_v0.1.0.md
-    └── TEST_REPORT_v0.1.1-telecom.md
+    ├── TEST_REPORT_v0.1.1-telecom.md
+    └── TEST_REPORT_v0.1.2-regression.md
 ```
 
-## Why v0.1.2 exists
-
-v0.1.1を日本の携帯4社の通信約款・料金条件へブラインド適用したところ、骨格は機能した一方で2つの不足が見つかりました。
-
-### 1. Document Stack / Document Function
-
-通信サービスの条件は基本約款だけでは完結せず、料金表、別表、提供条件書、重要事項説明、FAQ、商品ページに分散します。
-
-公式資料であることと、その資料が完全な契約条件を定めることは同義ではありません。
-
-### 2. Claim Dimensions
-
-「無制限」「無料」「定額」「保証」のような言葉は、そのまま比較できません。
-
-たとえば通信の「無制限」は、
-
-```text
-料金上限
-データ総量
-高速通信量
-速度保証
-速度制御条件
-テザリング
-地域
-計測期間
-```
-
-などに分解して比較します。
-
-これにより「同じ言葉だが、実際には別の条件を比較していた」という偽の矛盾を減らします。
-
-## Core rules
-
-> Verify the contradiction before explaining the contradiction.
-
-> Compare normalized dimensions, not labels.
-
-> An official source still needs a document-function check.
-
-そのうえで、
-
-> A contradiction is not an error until rule, exception, scope, timeline, representation, and operation have been separated.
-
-調査結果は必ず、
-
-- 確認済み事実
-- 制度・契約上の説明
-- 最も整合的な仮説
-- 未確認事項
-
-に分けます。
-
-## Domain modules
+## Modules
 
 ### Japanese address forensics
 
-```text
-modules/jp-address.md
-```
+`modules/jp-address.md`
 
-地番、基礎番号、住居番号、棟番号、各戸番号などを別レイヤーとして扱います。
+Separates parcel number, block number, basic number, residence number, building number, and unit number.
 
 ### Telecom contract forensics
 
-```text
-modules/telecom-contracts.md
-```
+`modules/telecom-contracts.md`
 
-約款、料金表、提供条件書、重要事項説明、FAQ、商品ページをDocument Stackとして扱い、「無制限」等を意味次元へ分解します。
+Separates base terms, pricing tables, plan conditions, important-matters documents, FAQ/support, and marketing pages; decomposes ambiguous claims such as “unlimited”.
 
-## Case studies
+## Examples and anti-examples
 
-### Kusunokamicho 2-1-2
+Good/real investigation cases:
 
-元の住所ケースは、Premise Validationの必要性を発見した **Unresolved regression case** として残しています。
+- `examples/kusunokamicho-2-1-2.md`
+- `examples/mobile-unlimited-jp-4carriers.md`
 
-### Japanese four-carrier unlimited plans
+Compact failure examples:
 
-```text
-examples/mobile-unlimited-jp-4carriers.md
-```
+- `examples/anti-patterns.md`
 
-NTTドコモ、au、SoftBank、楽天モバイルの現行無制限系プランを使い、ラベルではなく容量・速度・テザリング・計測期間等を分解して比較したケースです。
-
-## Usage
-
-AIエージェントに `SKILL.md` と必要なdomain moduleを読み込ませ、対象現象を渡します。
-
-例:
-
-```text
-この通信プランは「無制限」と書いてあるのに速度制御があります。
-institutional-forensics と telecom-contracts module を使い、
-まず前提を検証し、Document Stackを作り、
-「無制限」の意味を独立したdimensionへ分解して調査してください。
-```
+The anti-patterns are intentional: contributors should be able to see not only what a good answer looks like, but how the method fails.
 
 ## Validation status
 
-Current validation includes:
+Tested so far:
 
 1. address-system regression / adversarial premise
 2. My Number card vs electronic-certificate validity periods
-3. bicycle roadway rule vs sidewalk exceptions and enforcement operation
+3. bicycle roadway rule vs sidewalk exceptions and enforcement
 4. Japanese four-carrier telecom-contract blind test
+5. telecom regression after Document Function / Claim Dimensions changes
 
-The telecom test exposed missing abstractions in v0.1.1 and directly produced v0.1.2.
+## Contribution direction
+
+Before broad contributor onboarding, the project is still being hardened through blind tests.
+
+Useful contributions include:
+
+- cases that break the current method
+- missing domain-specific checks
+- validator improvements
+- test fixtures
+- domain modules that avoid expanding the common core
+
+For now, prefer **one new domain module at a time**. Domain knowledge should live in modules unless repeated failures prove that the core itself needs to change.
 
 ## Status
 
-Experimental. The method is intentionally being tested with unfamiliar domains before broader contributor onboarding.
+Experimental. The goal is not to make AI sound more confident about institutions, but to make unsupported confidence harder.
 
 ## License
 
