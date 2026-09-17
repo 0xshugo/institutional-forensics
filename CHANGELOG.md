@@ -44,6 +44,7 @@ Cross-domain patch driven by a blind test against current Japanese mobile-carrie
 - `modules/telecom-contracts.md`
 - `examples/mobile-unlimited-jp-4carriers.md`
 - `tests/TEST_REPORT_v0.1.1-telecom.md`
+- `tests/TEST_REPORT_v0.1.2-regression.md`
 
 ### Changed
 
