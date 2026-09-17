@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.4] - 2026-09-17
+
+Content patch: two new worked examples in untested domains, both built entirely from primary sources fetched and quoted during the investigation.
+
+### Added
+
+- `examples/applecare-warranty-layers.md` — the folk claim “法定保証1年”: statutory (JP Civil Code 5-year / EU directive 2-year) vs commercial (Apple 1-year) vs AppleCare+ incident coverage; JP/US 2022→2025 terms drift verified from Apple's own dated PDFs; the investigation invalidated its own initial hypothesis (no conformity-guarantee clause exists in the Consumer Contract Act)
+- `examples/google-photos-unlimited.md` — cohort coexistence after the 2021-06-01 sunset: 15 GB general quota, surviving Pixel-5-and-earlier unlimited, permanent grandfathering of pre-sunset uploads, label renaming (High quality → Storage saver), and drifting announcement URLs
+
+### Changed
+
+- README example list and validation status now record the consumer-law and platform-terms domains
+
+### Reason
+
+The method had only been demonstrated on addresses and telecom. These two cases exercise the core path in new domains (warranty layers, platform storage terms) and demonstrate the most uncomfortable forensic outcome: **the investigator's own premise collapsing under direct source inspection**.
+
+---
+
 ## [0.1.3] - 2026-09-17
 
 Execution-cost and validation patch driven by an external audit of the v0.1.2 method.

@@ -2,7 +2,7 @@
 
 Evidence-first Skill for investigating contradictions in rules, contracts, policies, specifications, and real-world operations.
 
-**Version:** v0.1.3 — experimental
+**Version:** v0.1.4 — experimental
 
 > Verify the contradiction before explaining it.
 
@@ -97,6 +97,8 @@ field
 ├── examples/
 │   ├── kusunokamicho-2-1-2.md
 │   ├── mobile-unlimited-jp-4carriers.md
+│   ├── applecare-warranty-layers.md
+│   ├── google-photos-unlimited.md
 │   └── anti-patterns.md
 └── tests/
     ├── VALIDATOR_CHECKLIST.md
@@ -123,8 +125,10 @@ Separates base terms, pricing tables, plan conditions, important-matters documen
 
 Good/real investigation cases:
 
-- `examples/kusunokamicho-2-1-2.md`
-- `examples/mobile-unlimited-jp-4carriers.md`
+- `examples/kusunokamicho-2-1-2.md` — premise / granularity / address system
+- `examples/mobile-unlimited-jp-4carriers.md` — document function / unlimited decomposition
+- `examples/applecare-warranty-layers.md` — warranty layers / statutory vs commercial / JP-EU-US / timeline drift (the investigation invalidated its own initial premise)
+- `examples/google-photos-unlimited.md` — cohort coexistence / legacy grandfathering / label renaming / drifting announcement URLs
 
 Compact failure examples:
 
@@ -141,6 +145,8 @@ Tested so far:
 3. bicycle roadway rule vs sidewalk exceptions and enforcement
 4. Japanese four-carrier telecom-contract blind test
 5. telecom regression after Document Function / Claim Dimensions changes
+6. warranty-layer case: AppleCare+ JP/US terms + Japanese Civil Code / Consumer Contract Act / EU directive (consumer-law domain, first pass; invalidated its own initial hypothesis)
+7. Google Photos storage sunset: cohort coexistence and legacy grandfathering (platform-terms domain)
 
 ## Contribution direction
 
