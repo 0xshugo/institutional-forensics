@@ -1,13 +1,52 @@
 # Changelog
 
-## [0.1.4] - 2026-09-17
+## [0.1.5] - 2026-09-17
 
-Content patch: two new worked examples in untested domains, both built entirely from primary sources fetched and quoted during the investigation.
+Correction and validator-hardening patch driven by factual errors found in the v0.1.4 sample expansion.
+
+### Fixed
+
+- `examples/applecare-warranty-layers.md`
+  - removed the false claim that sales law contains no corresponding one-year rule
+  - added Civil Code Article 566 as a one-year notice period for certain lack-of-conformity claims in sales
+  - separated notice period, limitation period, commercial warranty, and AppleCare service coverage
+  - retained the narrower conclusion that Apple's one-year limited warranty is a voluntary commercial warranty offered in addition to consumer-law rights
+- `examples/google-photos-unlimited.md`
+  - replaced unsupported `永久 / 恒久` language with the narrower current-policy statement actually supported by Google's official help
+  - separated quota exemption from retention guarantees
+  - stopped treating `Pixel 5 and earlier` as a fully homogeneous detailed cohort without model/quality/date-specific sourcing
 
 ### Added
 
-- `examples/applecare-warranty-layers.md` — the folk claim “法定保証1年”: statutory (JP Civil Code 5-year / EU directive 2-year) vs commercial (Apple 1-year) vs AppleCare+ incident coverage; JP/US 2022→2025 terms drift verified from Apple's own dated PDFs; the investigation invalidated its own initial hypothesis (no conformity-guarantee clause exists in the Consumer Contract Act)
-- `examples/google-photos-unlimited.md` — cohort coexistence after the 2021-06-01 sunset: 15 GB general quota, surviving Pixel-5-and-earlier unlimited, permanent grandfathering of pre-sunset uploads, label renaming (High quality → Storage saver), and drifting announcement URLs
+- `tests/TEST_REPORT_v0.1.5-corrections.md`
+- anti-patterns for:
+  - overconfident negative/exclusive claims
+  - promoting current state to permanence
+- validator checks for:
+  - `存在しない / never / only / 唯一` claims
+  - current-state → permanent-promise inference
+  - neighboring-dimension conflation such as `quota != retention` and `notice period != limitation period`
+
+### Changed
+
+- `SKILL.md` version bumped to v0.1.5
+- Falsification now explicitly applies to decisive replacement claims created while refuting the original premise
+- no new mandatory workflow step was added; the fast path remains `Premise → Document Function → Claim Dimensions → Falsification`
+
+### Reason
+
+The new examples showed that a method can correctly invalidate the user's initial premise and still hallucinate an overbroad replacement explanation. The appropriate fix was not another reasoning stage, but stricter falsification of negative/exclusive claims and stricter dimension boundaries.
+
+---
+
+## [0.1.4] - 2026-09-17
+
+Content patch: two new worked examples in untested domains, both built from primary-source investigation.
+
+### Added
+
+- `examples/applecare-warranty-layers.md` — warranty-layer investigation across Japanese law, Apple commercial warranties and EU consumer-sales rules
+- `examples/google-photos-unlimited.md` — cohort coexistence after the 2021-06-01 storage-policy change
 
 ### Changed
 
@@ -15,7 +54,7 @@ Content patch: two new worked examples in untested domains, both built entirely 
 
 ### Reason
 
-The method had only been demonstrated on addresses and telecom. These two cases exercise the core path in new domains (warranty layers, platform storage terms) and demonstrate the most uncomfortable forensic outcome: **the investigator's own premise collapsing under direct source inspection**.
+The method had only been demonstrated on addresses and telecom. These two cases exercise the core path in new domains and intentionally expose new failure modes.
 
 ---
 
