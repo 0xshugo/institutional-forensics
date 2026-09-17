@@ -1,190 +1,39 @@
 ---
 name: institutional-forensics
-description: 見かけ上矛盾・重複・不整合に見える制度、規則、契約、運用、仕様を、前提検証・文書機能・意味次元・一般則・例外・適用範囲・時系列・実運用・一次資料に分解して再現可能に調査するEvidence-first Skill。
-version: 0.1.2
+description: 見かけ上の矛盾・重複・不整合を、前提・文書機能・意味次元・反証の最小必須パスで検証し、必要時だけ例外・時系列・運用へ展開するEvidence-first Skill。
+version: 0.1.3
 language: ja
 status: experimental
 ---
 
 # Institutional Forensics / 制度フォレンジック
 
-「ルール上はこうなるはずなのに現実は違う」「同じ番号・名称・扱いが重複している」「公式資料同士が矛盾して見える」「広告上の表現と契約条件が違って見える」「昔の制度が現在まで残っている」といった現象を、制度・文書・意味・例外・時系列・実運用に分解して調査する。
+制度・規則・契約・仕様の「なぜこうなっている？」を、AIがもっともらしく説明する前に、まず壊れにくい最小手順で検証する。
 
-目的は、もっともらしい説明を作ることではない。
-
-**観測事実、文書の役割、用語の意味、一般則、例外規定、適用範囲、実運用、歴史的経緯、推定を分離し、第三者が追試できる証拠チェーンを作ること**を目的とする。
-
-最重要原則:
+## Core principle
 
 ```text
-説明する前に、まず「説明すべき現象が本当に存在するか」を確認する。
-
-同じ言葉だから、同じ意味とは限らない。
-
-同じ発行主体の公式文書だから、同じ役割・重みとは限らない。
+Verify the contradiction before explaining it.
+Compare dimensions, not labels.
+Official != same function.
+Confirmed must not rest on inference alone.
 ```
 
 ---
 
-## 1. Trigger
+# 1. Mandatory Fast Path
 
-次のような依頼で使用する。
+通常はこの4段階だけを必須とする。
 
-- なぜ同じ番号が二つ存在する？
-- 公式ルールと実際の運用が食い違うのはなぜ？
-- この制度は例外扱いではないか？
-- 昔の仕様が残っているだけでは？
-- 公式資料AとBが矛盾して見える
-- 法律ではこうなのに現場では違う理由を調べたい
-- 「無料」「無制限」「保証」などの表示と細則が食い違って見える
-- 料金、契約、行政手続、規格、住所などの不可解な例を一次資料まで遡りたい
-- 制度変更前後の経緯を時系列で復元したい
+## 1. Premise
 
-典型対象:
+その「矛盾」「重複」「例外」は本当に存在するか。
 
-- 行政制度
-- 住所・地番・住居表示
-- 料金制度・価格体系
-- 契約条件・約款
-- 通信サービス
-- 税制・補助制度
-- 標準・規格・技術仕様
-- 組織内規程
-- レガシーシステム仕様
-- 認証・資格制度
-- 公共調達
-- 運用ルール
-- 例外処理・経過措置
-
----
-
-## 2. Core Model
-
-制度的不整合を最初から「間違い」と決めつけない。
-
-最低でも次のレイヤーに分解する。
-
-1. **Premise** — そもそも現象が事実か
-2. **Observation** — 何が観測されたか
-3. **Object / Granularity** — 同じ対象粒度を比較しているか
-4. **Document Function** — 各資料は何を定め、何を説明する文書か
-5. **Claim Dimensions** — 同じ言葉がどの意味次元を指すか
-6. **General Rule** — 一般則
-7. **Exception** — 例外規定・特例
-8. **Scope** — 適用範囲・管轄・対象・契約群・版
-9. **Timeline / Source Drift** — 制度変更と資料の変遷
-10. **Operation** — 実際の運用・登録・実装
-11. **Representation** — 表記、省略、UI、便宜表現
-12. **Legacy** — 既得扱い・経過措置
-13. **Implementation / Human Error** — 実装制約・誤記・誤運用
-
-基本式:
-
-```text
-見かけ上の矛盾
-≠ 即エラー
-
-見かけ上の矛盾
-= 前提誤認
-+ 対象粒度差
-+ 文書機能差
-+ 意味次元差
-+ 一般則
-+ 例外
-+ 適用範囲
-+ 時系列
-+ 実運用
-+ 表記差
-+ レガシー
-のいずれか、または複合で説明される可能性
-```
-
----
-
-## 3. Evidence Classes
-
-各主張にEvidence Classを付ける。
-
-| Class | 定義 | 例 |
-|---|---|---|
-| A | 個別案件に直接適用される一次資料 | 台帳、契約原本、正式通知、登記、個別処分、公式DB |
-| B | 制度・契約を定める一次資料 | 法令、告示、条例、規則、約款、料金表、標準仕様、公式規程 |
-| C | 歴史的一次資料 | 旧版法令、旧約款、当時の告示、旧仕様、議事録、旧地図、公文書 |
-| D | 公式な運用・説明資料 | 重要事項説明、提供条件書、FAQ、公式マニュアル、商品ページ、公開データ |
-| E | 信頼できる二次資料 | 学術論文、専門家解説、報道、専門DB |
-| F | 観測・推定 | 現地観察、民間地図、時系列補完、制度適用の推論 |
-
-原則:
-
-```text
-結論の骨格 = A〜D
-補強 = E
-探索・仮説 = F
-```
-
-Fだけで確定しない。
-
-### Important
-
-Evidence Classは「信頼度」だけを表すものではない。
-
-たとえば公式の商品ページと契約約款はどちらも公式情報だが、**Document Functionが違う**。
-
-そのためEvidence Classとは別に文書機能を記録する。
-
----
-
-## 4. Evidence Identity Tuple
-
-証拠はURLだけで管理しない。
-
-最低でも次を記録する。
-
-```text
-issuer          発行主体
-document_type   文書種別
-object          対象
-object_level    対象粒度
-field           何の値・条件か
-published       公開日
-effective_from  発効日 / 適用開始
-effective_to    終了日（あれば）
-valid_at        どの時点を表すか
-version         版・改訂番号
-status          current / historical / superseded / unknown
-function        normative / explanatory / operational / marketing
-applies_to      適用対象・契約群
-```
-
-**対象粒度が違う資料を、同じ事実の証明に使わない。**
-
-例:
-
-```text
-施設全体の所在地    != 2号棟の正式住居番号
-商品ページの価格    != 個別契約の請求額
-規格本文            != 特定製品の実装
-基本約款            != 特定料金プランの全数値条件
-```
-
----
-
-# 5. Investigation Workflow
-
-## STEP -1 — Premise Validation
-
-説明に入る前に、ユーザーが提示した「矛盾」「重複」「例外」が本当に存在するか確認する。
-
-必須確認:
-
-1. 比較される両方の値を別々に確認する
-2. 可能なら少なくとも一方は一次・公式資料で確認する
-3. 同じ対象粒度か確認する
-4. 同じ時点・版を比較しているか確認する
-5. 引用元が現在アクセス可能か確認する
-6. 古い資料なら後続版・改訂版を探す
-7. 公式資料同士で値が変化していないか確認する
-8. 同じ単語が同じ意味次元を指しているか確認する
+必須:
+- 両側の事実を別々に確認
+- 同じ対象粒度か確認
+- 同じ時点・版か確認
+- 古い資料なら後続版を確認
 
 出力:
 
@@ -196,635 +45,308 @@ Premise status:
 - Refuted
 ```
 
-`Not established` または `Refuted` の場合、元の制度説明をエスカレートしない。
-
-問題を、必要に応じて次へ切り替える。
-
-```text
-なぜ異なる情報源が異なる値を示すのか
-
-または
-
-なぜ同じ言葉が異なる意味で使われているのか
-```
+`Not established` / `Refuted` なら、元の謎の説明を進めない。
 
 ---
 
-## STEP 0 — Anomaly Definition
+## 2. Document Function
 
-前提検証を通過した後、一文で定義する。
-
-悪い例:
+主要Sourceが何をする文書かを分ける。
 
 ```text
-無制限なのに制限がある。おかしい。
+normative     ルール・契約を定める
+explanatory   条件や制度を説明する
+operational   実運用を説明する
+marketing     商品・制度を要約して表示する
+historical    過去時点の状態を示す
 ```
 
-良い例:
-
-```text
-商品表示ではデータ容量を「無制限」としている一方、提供条件では特定条件で速度制御が定められている。
-「無制限」が指す次元と、速度制御が作用する次元を分離する。
-```
-
-評価語だけの定義は禁止。
-
----
-
-## STEP 1 — Entity / Object Separation
-
-対象を混同しない。
-
-| Field | 内容 |
-|---|---|
-| Entity / Object | 対象名称 |
-| Object level | 制度 / 組織 / 施設 / 建物 / 住戸 / 契約 / プラン / アカウント等 |
-| Observed value | 観測値 |
-| Source | 出典 |
-| Jurisdiction | 管轄 |
-| Effective date | 適用時点 |
-| Version | 規則・仕様の版 |
-| Cohort | 加入時期・既存契約群など |
-| Status | current / historical / superseded |
-
-似た名称、旧名称、別バージョン、別地域、別法人、別契約、別プランを同一視しない。
-
----
-
-## STEP 2 — Document Stack / Document Function
-
-複数文書が一つの制度や契約を構成する場合、文書スタックを作る。
-
-例:
-
-```text
-法令・規制
-  ↓
-基本規程 / 基本約款
-  ↓
-別表 / 料金表 / 附則
-  ↓
-個別提供条件
-  ↓
-重要事項説明
-  ↓
-運用FAQ / ガイド
-  ↓
-商品ページ / 広告
-```
-
-これは単純な法的優先順位を意味しない。
-
-各文書について確認する。
-
-```text
-何を定める文書か
-何を説明する文書か
-どの対象に適用されるか
-契約へどう組み込まれるか
-どの版が有効か
-他文書を参照しているか
-```
-
-### Rule
+ルール:
 
 ```text
 公式資料である
 !=
-完全な契約条件がその文書だけで分かる
+完全な条件をその文書だけで確定できる
 ```
 
-また、
-
-```text
-基本約款に数値条件が見つからない
-!=
-数値条件が存在しない
-```
-
-別表、料金表、提供条件書、附則、重要事項説明を探す。
-
----
-
-## STEP 3 — Claim Decomposition / Semantic Dimensions
-
-「無制限」「無料」「定額」「保証」「永久」「使い放題」など、複数解釈可能なclaimは、そのまま事実単位にしない。
-
-対象に応じて独立変数へ分解する。
-
-例: 通信の「無制限」
-
-```text
-料金上限
-データ総量
-高速通信量
-速度保証
-速度制御条件
-制御後速度
-計測期間
-通信種別
-テザリング
-地域
-ローミング
-混雑条件
-通常利用外条件
-```
-
-例: 「無料」
-
-```text
-初期費用
-月額
-従量部分
-特定機能
-期間限定
-条件付き割引
-後日還元
-```
-
-### Comparison Rule
-
-複数事業者を比較する場合:
-
-```text
-marketing label vs marketing label
-```
-
-ではなく、
-
-```text
-normalized dimension vs normalized dimension
-```
-
-で比較する。
-
----
-
-## STEP 4 — Hypotheses in Parallel
-
-初期段階で一つの説明に飛びつかない。
-
-最低限:
-
-```text
-H0 前提そのものが誤っている / 粒度・意味次元が違う
-H1 表記・省略の問題
-H2 単純な誤記・データ不備
-H3 一般則とは別の例外規定
-H4 管轄・対象範囲が異なる
-H5 制度改正前後の新旧ルールが混在
-H6 経過措置・既得扱い
-H7 実運用が制度文言と異なる
-H8 実装・システム制約
-H9 個別決定・特例承認
-H10 異なる概念が同じ文字列で表現されている
-H11 文書の役割が違う
-H12 契約者cohort / 加入時期が違う
-```
-
-この段階では勝者を決めない。
-
----
-
-## STEP 5 — Governing System
-
-対象を支配するルール体系を特定する。
-
-確認項目:
-
-- 法令 / 条例 / 告示 / 規則
-- 約款 / 契約 / 料金表 / 提供条件
-- 標準 / 規格 / 仕様書
-- 組織内規程
-- 管轄主体
-- 適用地域
-- 対象者・対象物
-- 契約者cohort
-- 有効期間
-- バージョン
-
-ルール本文だけでなく、**誰に・いつ・どこで・どの版が適用されるか**を確認する。
-
----
-
-## STEP 6 — General Rule
-
-制度が通常どう動くかを一次資料で確認する。
-
-```text
-General Rule:
-- 条件:
-- 処理:
-- 結果:
-- 根拠:
-- 発効日:
-- 適用対象:
-- document function:
-```
-
-ここではまだ個別案件へ適用したと断定しない。
-
----
-
-## STEP 7 — Exceptions / Transitional Rules
-
-検索すべき語:
-
-```text
-例外
-特例
-ただし
-みなし
-経過措置
-従前
-附則
-当分の間
-別段
-個別に定める
-差し支えない
-適用しない
-除く
-grandfather
-legacy
-exception
-special case
-transition
-```
-
-契約・料金分野ではさらに:
-
-```text
-提供条件
-対象外
-上限
-超過
-速度制御
-混雑
-公平
-通常の利用
-別途定める
-料金表
-別表
-```
-
-特に附則、脚注、別表、FAQ、運用通知を確認する。
-
----
-
-## STEP 8 — Representation Layer
-
-「制度そのもの」と「表示」を分ける。
+複数文書に条件が分散する場合だけ、Document Stackを作る。
 
 例:
 
-- ハイフン表記で意味が潰れる
-- UI上で一部フィールドが省略される
-- 便宜名称と正式名称が異なる
-- 内部IDと表示番号が同じ数字
-- 税込 / 税抜
-- 年額 / 月額
-- 棟番号 / 住居番号
-- 規格名 / 実装名
-- 契約上の名称 / 商品名
-- 本文 / 脚注
-
-同じ文字列だから同じ概念とは限らない。
-
----
-
-## STEP 9 — Actual Operation
-
-規則が存在することと、対象へ実際に適用されたことは別。
-
-探すもの:
-
-- 個別台帳
-- 公式DB
-- 契約書
-- 公示
-- 行政資料
-- 調達資料
-- 実装コード / 仕様
-- 請求書 / 料金表
-- 重要事項説明
-- FAQ / サポート文書
-- 過去の公式ページ
-- 担当機関の回答
-
-可能なら独立した2系統以上で確認する。
-
-また、次を分離する。
-
 ```text
-legal / contractual rule  法的・契約的に何が定められるか
-operation                 実際にどう運用されるか
-enforcement               どのように取締・監査・是正されるか
-marketing / representation 利用者へどう表現されるか
+法令 / 基本約款
+→ 別表 / 料金表 / 附則
+→ 個別提供条件
+→ 重要事項説明
+→ FAQ / 運用案内
+→ 商品ページ / 広告
 ```
 
 ---
 
-## STEP 10 — Timeline and Source Drift
+## 3. Claim Dimensions
 
-制度的不整合は時間軸で解けることが多い。
+「無制限」「無料」「保証」「永久」「対象」「同一」など、複数解釈できる言葉は分解する。
 
-```text
-YYYY-MM-DD: 制度A開始 [B]
-YYYY-MM-DD: 対象X成立 [A/C]
-YYYY-MM-DD: 例外規定Y導入 [B]
-YYYY-MM-DD: 制度改正 [B]
-YYYY-MM-DD: 新規対象のみ新ルール適用 [B/D]
-YYYY-MM-DD: 現在の観測 [A/D]
-```
-
-確認するもの:
-
-- 制度開始
-- 対象成立
-- 改正
-- 移行期間
-- 経過措置
-- 廃止
-- 再編
-- システム移行
-- 名称変更
-- 個別認定
-- 契約加入時期
-- 旧プラン継続者
-
-### Source Drift
-
-古い公式資料と新しい公式資料が異なる場合、即「矛盾」としない。
+例:
 
 ```text
-source A valid_at = 2021
-source B valid_at = 2026
+無制限
+→ 容量 / 高速容量 / 速度 / 料金 / テザリング / 地域 / 計測期間
+
+無料
+→ 初期費用 / 月額 / 従量 / 条件付き割引 / 期間限定 / 還元
 ```
 
-なら、制度変更または対象変更の可能性を先に検証する。
+比較はラベル同士ではなく、正規化したdimension同士で行う。
 
 ---
 
-## STEP 11 — Contradiction Matrix
+## 4. Falsification
 
-主要仮説を観測事実に対して比較する。
+有力な説明を補強する前に、壊せる証拠を探す。
 
-| Observation | H0 前提/意味 | H2 誤記 | H3 特例 | H5 新旧 | H11 文書機能 | H12 cohort |
-|---|---:|---:|---:|---:|---:|---:|
-| 公式資料同士で差 | ○ | △ | ○ | ○ | ○ | ○ |
-| 同日・同対象・同次元 | × | ○ | ○ | △ | △ | △ |
-| 旧版だけ差 | △ | △ | △ | ◎ | △ | ○ |
-| 商品表示と細則の差 | ○ | △ | ○ | △ | ◎ | △ |
-
-凡例:
+最低1つ答える。
 
 ```text
-◎ 強く説明
-○ 説明可能
-△ やや不自然
-× 矛盾
-- 無関係
+この説明が誤りなら、どんな一次資料が存在するはずか？
+どんな事例が見つかれば、この結論は覆るか？
 ```
 
-Matrixは結論そのものではなく、探索優先順位を決める道具とする。
+反証確認後にのみ結論を出す。
 
 ---
 
-## STEP 12 — Falsification
+# 2. Conditional Expansion
 
-有力仮説を補強する前に、それを壊せる資料を探す。
+以下は必要な場合だけ展開する。毎回全部実行しない。
 
-質問:
+## Object / Granularity
+
+対象粒度が違う疑いがあるとき。
+
+例:
 
 ```text
-この仮説が誤りなら、どんな資料が存在するはずか？
-この仮説に反する公式事例はないか？
-別の管轄では逆の運用になっていないか？
-改正日と対象成立日は整合するか？
-より個別性の高い文書が別条件を定めていないか？
-同じclaimを別の意味次元で使っていないか？
+施設 != 建物 != 住戸
+プラン != 個別契約 != アカウント
+規格 != 製品実装
+```
+
+## General Rule / Exception
+
+一般則と例外の差が問題の中心であるとき。
+
+## Scope / Cohort
+
+地域、対象者、加入時期、旧契約者、新規契約者などで条件が違うとき。
+
+## Timeline / Source Drift
+
+制度改正、約款改定、古い資料、新旧UIなどが混在するとき。
+
+## Operation / Enforcement
+
+制度上のルールと実際の運用・取締・監査が違うとき。
+
+## Legacy / Transition
+
+経過措置、既得権、従前扱いが疑われるとき。
+
+## Implementation / Human Error
+
+実装制約、データ不備、単純誤記が候補になるとき。
+
+---
+
+# 3. Evidence Model
+
+## Evidence Classes
+
+| Class | 定義 |
+|---|---|
+| A | 個別案件へ直接適用される一次資料 |
+| B | 制度・契約を定める一次資料 |
+| C | 歴史的一次資料 |
+| D | 公式な説明・運用資料 |
+| E | 信頼できる二次資料 |
+| F | 観測・推定 |
+
+原則:
+
+```text
+Confirmed の骨格 = A〜D
+補強 = E
+探索・仮説 = F
+```
+
+**F単独でConfirmedにしない。**
+
+---
+
+# 4. Minimal Evidence Identity
+
+主要Sourceごとに、必須は5項目だけ。
+
+```text
+issuer        発行主体
+function      normative / explanatory / operational / marketing / historical
+object_level  制度 / 施設 / 建物 / 契約 / プラン / アカウント等
+valid_at      どの時点を表すか
+source        URL / 文書ID / 資料名
+```
+
+必要時のみ追加:
+
+```text
+version
+published
+applies_to
+status
+field
 ```
 
 ---
 
-## STEP 13 — Conclusion Layers
+# 5. Hypothesis Set
 
-結論を最低4層に分ける。
+必要なら次を初期仮説として使う。
 
-### 確認済み事実
-一次・公式資料で直接確認できたもの。
-
-### 制度・契約上の説明
-一般則、例外、文書関係から直接導けるもの。
-
-### 最も整合的な仮説
-証拠と整合するが、個別適用記録等が未確認のもの。
-
-### 未確認事項
-確認すれば仮説を確定・棄却できるもの。
-
-必要に応じて追加:
-
-### 表示上の意味
-利用者向けclaimがどのdimensionを指すか。
-
-### 実運用
-現在、実際にどう適用されると公式に説明されているか。
+```text
+H0 前提誤り / 粒度違い
+H1 表記・省略
+H2 誤記・データ不備
+H3 例外規定
+H4 適用範囲違い
+H5 新旧ルール混在
+H6 経過措置
+H7 実運用差
+H8 実装制約
+H9 個別特例
+H10 同じ語が別概念を表す
+```
 
 ---
 
-# 6. Confidence
-
-## Confirmed
-個別案件への適用理由、または構造的結論まで十分な一次資料で確認。
-
-## Highly likely
-一般則、例外、適用範囲、時系列、実運用が整合するが、個別決定記録等が未確認。
-
-## Plausible
-制度的説明は可能だが、重要な時系列・適用記録・文書関係が不足。
-
-## Unresolved
-複数仮説が同程度に残る。
-
-## Premise not established
-そもそもの矛盾・重複が同一粒度・同一時点・同一意味次元で確認できない。
-
-**Highly likely を Confirmed と書かない。**
-
----
-
-# 7. Stop Conditions
-
-Web調査を終了してよい条件:
-
-- Premise statusを判定した
-- anomalyを明確化した
-- 対象Entity / Object / Granularityを分離した
-- 複数文書がある場合Document Stackを作った
-- 曖昧なclaimがある場合Dimensionsへ分解した
-- governing systemを特定した
-- 一般則を確認した
-- 主要な例外規定を確認した
-- 適用範囲 / cohort / 版 / 日付を確認した
-- 実運用を公式資料で確認した
-- Source Driftを確認した
-- 主要仮説を比較した
-- 反証を探した
-- 未確認事項を明示した
-
-「確定」とするなら、できるだけ個別記録または対象に直接適用される資料まで取得する。
-
----
-
-# 8. Common Failure Modes
-
-## 8.1 謎の前提を信じる
-最初にPremise Validationを行う。
-
-## 8.2 同じ単語を同じ意味だとみなす
-Claim Dimensionsへ分解する。
-
-## 8.3 公式資料を全部同じ重みで扱う
-Document Functionを確認する。
-
-## 8.4 約款だけ読めば契約条件が全部分かると思う
-料金表、別表、附則、提供条件、重要事項説明を確認する。
-
-## 8.5 現行ルールだけを見る
-対象成立時・契約加入時の旧ルールを確認する。
-
-## 8.6 本文だけ見て附則や脚注を読まない
-例外や定量条件は附則・別表・脚注にあることが多い。
-
-## 8.7 一般則 = 個別適用とみなす
-対象案件への適用資料を別途探す。
-
-## 8.8 公式資料同士の不一致を即「誤り」とする
-版、時点、文書機能、管轄、対象範囲を確認する。
-
-## 8.9 検索結果スニペットを最終根拠にする
-必ず原文へ進む。
-
-## 8.10 「見つからない」=「存在しない」
-非公開台帳、別表、古いPDF、担当部署照会の可能性を残す。
-
-## 8.11 二次資料の説明をそのまま採用する
-一次資料で再構成できるか確認する。
-
-## 8.12 ストーリーが綺麗すぎる
-証拠の欠落を推定で埋めていないか確認する。
-
-## 8.13 固定閾値なし = 制限なし
-特に通信・ITでは混雑制御、公平制御、異常利用制御を別に確認する。
-
----
-
-# 9. Mandatory Output
+# 6. Mandatory Output
 
 ```markdown
-# 結論
-Confidenceを明示。
+# Conclusion
+Confidence: Confirmed / Highly likely / Plausible / Unresolved
 
-## 0. Premise Validation
+## Premise status
 Established / Partially established / Not established / Refuted
 
-## 1. 何が矛盾して見えるのか
-観測事実のみ。
+## What is actually being compared
+対象と必要なClaim Dimensions。
 
-## 2. 対象と粒度
-Entity / object level / jurisdiction / version / cohort / effective date。
+## Governing evidence
+主要SourceとDocument Function。
 
-## 3. Document Stack
-各文書の役割・適用関係。
+## Explanation
+確認済み事実 / 制度・契約上の説明 / 仮説を分離。
 
-## 4. Claim Dimensions
-曖昧な表示・用語を独立変数へ分解。
-
-## 5. 一般則
-一次資料で整理。
-
-## 6. 例外・特例・経過措置
-対象へ適用可能か検証。
-
-## 7. 仮説比較
-Contradiction Matrix。
-
-## 8. 時系列 / Source Drift
-Evidence ClassとDocument Functionを付ける。
-
-## 9. 最も整合的な説明
-事実と推定を分離。
-
-## 10. 反証可能性
+## Falsification
 何が見つかれば結論が覆るか。
 
-## 11. 未確認事項
-残るギャップ。
-
-## 12. 次に裏を取るなら
-必要資料、問い合わせ先、確認質問。
-
-## Sources
-一次資料優先。
+## Unresolved
+未確認事項。
 ```
 
-単純な案件ではDocument StackやClaim Dimensionsが不要なら省略可。ただし、省略理由が明らかな場合に限る。
+必要な場合のみ追加:
+
+```text
+Timeline
+Exception matrix
+Document Stack
+Cohort comparison
+Operation / enforcement
+```
 
 ---
 
-# 10. Agent Prompt
+# 7. Validator
+
+出力前に必ず自己検査する。
+
+```text
+[ ] Premise status がある
+[ ] 主要Sourceに issuer がある
+[ ] 主要Sourceに function がある
+[ ] 比較対象の object_level が確認されている
+[ ] 時点差が重要なら valid_at がある
+[ ] Claimが曖昧ならdimension分解されている
+[ ] Confirmedの根拠がF単独ではない
+[ ] 反証条件が1つ以上ある
+[ ] Unresolvedを許容している
+```
+
+1つでも重大な欠落があれば、Confidenceを下げるか調査を追加する。
+
+---
+
+# 8. Anti-examples
+
+## BAD 1 — Premiseを飛ばす
+
+```text
+楠上第二住宅2号棟は棟番号特例で2-1-2になった。
+```
+
+問題:
+- 個別付番記録を確認していない
+- 前提未確定なのに制度説明を確定扱い
+
+GOOD:
+
+```text
+制度上は説明可能。ただし個別住所の一次資料が不足しているためUnresolved。
+```
+
+## BAD 2 — 基本約款だけで契約全体を決める
+
+```text
+基本約款に200GB制限がないので、このプランは完全無制限。
+```
+
+問題:
+- プラン固有条件、料金表、重要事項説明を見ていない
+- 「無制限」のdimensionが未分解
+
+GOOD:
+
+```text
+固定容量閾値と、混雑時制御・速度制御を別dimensionとして確認し、必要なDocument Stackを辿る。
+```
+
+---
+
+# 9. Compact Agent Prompt
 
 ```text
 あなたはInstitutional Forensics Agentです。
 
-対象:
-{{PHENOMENON}}
+対象: {{PHENOMENON}}
 
-目的:
-見かけ上矛盾・重複・不整合に見える制度、規則、契約、仕様、運用について、
-前提、対象粒度、文書機能、用語の意味次元、一般則、例外、適用範囲、時系列、実運用、表記差を分離し、一次資料を優先して再現可能な説明を構築してください。
+必須:
+1. Premiseを検証
+2. 主要SourceのDocument Functionを分類
+3. 曖昧なclaimを必要なdimensionへ分解
+4. 有力説明の反証を探す
 
-必須手順:
-1. 謎の前提そのものを検証
-2. 対象Entity/Object/Granularityを分離
-3. 複数文書が制度を構成する場合Document Stackを作る
-4. 「無制限」「無料」「保証」等の曖昧claimはDimensionsへ分解
-5. 仮説を複数並列に列挙
-6. governing systemと管轄を特定
-7. 一般則を一次資料で確認
-8. 例外・特例・附則・経過措置を確認
-9. 版、発効日、適用対象、契約者cohortを確認
-10. 表示と制度上の概念を分離
-11. 個別案件の実運用を公式資料で確認
-12. 時系列とSource Driftを復元
-13. Contradiction Matrixで仮説比較
-14. 有力仮説の反証を探す
-15. 結論を確認済み事実 / 制度上の説明 / 最も整合的な仮説 / 未確認事項に分離
-16. 仮説を確定または棄却するための次の確認先を示す
+必要な場合だけ、例外、scope/cohort、timeline/source drift、operation/enforcement、legacyを追加調査してください。
 
-禁止:
-- ユーザー提示の謎を未検証のまま事実扱い
-- 同じ語を同じ意味だと無条件に仮定
-- 公式商品ページを完全な契約条件だと仮定
-- 基本約款だけで全条件が分かったとみなす
-- 検索結果スニペットだけで結論
-- 現行ルールを過去へ無条件適用
-- 一般則を個別案件への適用証拠とみなす
-- 二次資料だけで確定
-- 推定を確認済み事実として書く
-- Webで見つからないことを不存在と断定
+主要Sourceごとに最低限 issuer / function / object_level / valid_at / source を記録してください。
 
-最後にConfidenceを
-Confirmed / Highly likely / Plausible / Unresolved / Premise not established
-のいずれかで示してください。
+ConfirmedはF（推定・観測）単独では認めません。
+証拠不足ならUnresolvedを選んでください。
+
+最後にvalidatorを実行してください。
 ```
 
 ---
 
-# 11. Domain Modules
-
-共通Skillで不足するドメイン固有知識は `modules/` に分離する。
+# 10. Domain Modules
 
 現在:
 
@@ -833,31 +355,19 @@ modules/jp-address.md
 modules/telecom-contracts.md
 ```
 
-今後の候補:
+コアを増やす前に、ドメイン固有知識はmodule側へ寄せる。
 
-```text
-modules/pricing-and-fees.md
-modules/contracts-and-terms.md
-modules/tax-and-subsidy.md
-modules/technical-standards.md
-modules/public-procurement.md
-modules/legacy-it-specs.md
-```
+次の新規moduleは一度に1本だけ追加し、共通SKILLの変更が本当に必要かを先に検証する。
 
 ---
 
-# 12. Definition of Done
+# 11. Definition of Done
 
-成果は「答えが出た」ことではなく、以下が揃った状態。
-
-1. 謎の前提が検証されている
-2. なぜ矛盾して見えるかが構造化されている
-3. 対象粒度が揃っている
-4. 文書ごとの役割が明確
-5. 曖昧なclaimが必要に応じて次元分解されている
-6. 一般則と例外規定が分離されている
-7. 適用範囲・契約者cohort・版・時点が明示されている
-8. 実運用と制度文言が区別されている
-9. 事実と推定が分離されている
-10. 反証可能性が示されている
-11. 第三者が同じ資料を辿って追試できる
+```text
+短く走れる
+欠落がvalidatorで分かる
+事実と仮説が分かれる
+反証可能
+第三者が追試できる
+Unresolvedで止まれる
+```
