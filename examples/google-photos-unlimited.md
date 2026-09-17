@@ -1,12 +1,12 @@
 # Case Study: Google Photos「無制限ストレージ」の日落とコホート併存
 
-Status: verified case / minor items unresolved  
+Status: corrected verified case / device-detail matrix partly unresolved  
 Skill: `institutional-forensics`  
-展開した機構: Claim Dimensions（「無料」分解） / Scope / Cohort / Legacy / Transition / Timeline / Source Drift / H10
+Primary mechanisms: Premise / Claim Dimensions / Scope / Cohort / Legacy / Timeline / Source Drift
 
 ## Premise status
 
-**コホートごとに真偽が分裂**
+**Cohort-dependent.**
 
 検証対象の通説:
 
@@ -15,199 +15,210 @@ Google Photosのストレージは「無制限」である
 （あるいは「無制限だった」）
 ```
 
-現行のGoogle公式ヘルプを直接確認すると、「無制限」は**同一ページ内で3つの別コホートに対して別々の意味**を持ち続けている。
+現行のGoogle公式ヘルプでは、同じGoogle Photosでもコホートごとに異なる扱いが併存している。
 
 ```text
-① 2021年6月1日より前のアップロード
-   → 高画質・エクスプレス画質分は「永久に容量カウント対象外」
-      = 実質的な無制限の既得権（レガシーコホート）
-② Pixel 5以前の端末
-   → 「無制限ストレージに無料でバックアップできます」と現行明記
-      = 端末限定の生存した無制限
-③ 一般新規ユーザー
-   → 最大15GB（Gmail・ドライブと共有プール）
-      = 無制限は完全に撤廃
+一般アカウント
+→ Googleアカウント全体で最大15GBの共有保存容量
+
+2021-06-01より前に
+高画質 / エクスプレス画質でバックアップした写真・動画
+→ 現行ポリシー上、Googleアカウント保存容量にカウントされない
+
+Pixel 5以前のGoogle Pixel
+→ そのデバイスから無制限ストレージに無料でバックアップできる、と現行ヘルプが案内
 ```
 
-したがって「無制限は終わった」も「無制限は今もある」も、**コホートを指定しなければ半分ずつ正しい**。ラベルではなくコホート×次元で答える必要がある。
+したがって、「無制限は終わった」「無制限は今もある」のどちらも、コホートと条件を指定しなければ粗すぎる。
 
-Confidence: **分裂構造はConfirmed（公式ヘルプ日英両版で条文相当の記載を確認）**
+Confidence: **Confirmed for the cohort split stated by the current official help.**
 
 ---
 
-## Anomaly
+## Important correction from the previous version
+
+旧版は、2021年6月1日より前の対象バックアップについて
 
 ```text
-「無料」の次元分解:
-→ ① 15GBの割当が無料（一般）
-   ② 無制限バックアップが無料（Pixel 5以前）
-   ③ 旧アップロードの容量課金が発生しない（2021年6月1日前コホート）
-の3種類が「無料」の一言で潰れている。
+永久に容量カウント対象外
+恒久除外
 ```
 
-さらに保持ポリシー側にも条件が潜む。
+と表現していた。
+
+これは一次資料より強い。
+
+Googleの現行文言から直接確認できるのは、
 
 ```text
-「Google フォトを 2 年以上使用していない場合や、
-  保存容量を使い切った場合は、写真と動画が削除される可能性があります」
+2021年6月1日より前に対象画質でバックアップした写真・動画は、
+現在のルール上、Googleアカウントの保存容量にカウントされない
 ```
 
-「無料保存」の語と「削除リスク」の語が同じページに併存する。
+という状態である。
 
----
-
-## Entities / object levels
-
-| Object | コホート | 現行の値 | function |
-|---|---|---|---|
-| 一般アカウント | 2021-06-01以降のアップロード | 最大15GB（Gmail/ドライブ共有） | normative |
-| レガシーアップロード | 2021-06-01より前の高画質・Express | 容量カウント対象外（恒久） | normative |
-| Pixel 5以前の端末バックアップ | 端末限定 | 無制限・無料 | normative |
-| 「高画質」ラベル | 表記 | 「保存容量の節約画質」に改称（旧称併記） | explanatory |
-| 旧マーケページ | 2021年より前 | "free unlimited photo storage" | marketing |
-
----
-
-## Initial hypotheses
+そこから
 
 ```text
-H4 適用範囲違い / 無制限はコホート（Pixel・旧ユーザー）ごとに生き残っている
-H5 新旧ルール混在 / 2021-06-01の制度断層が1つのライブラリ内に併存
-H6 経過措置 / 旧アップロードのカウント除外は既得権型の経過措置
-H10 同じ語が別概念を表す / 「無制限」= 容量 / 画質 / コホート / 期間の4次元
-H1 表記・省略 / 「高画質」→「保存容量の節約画質」への改称
+将来も絶対に変更されない
+永久に保持される
 ```
 
----
+まで推論してはいけない。
 
-## Confirmed institutional facts
+特にGoogleは同じヘルプ体系で、長期間の非アクティブや保存容量条件によってコンテンツが削除される可能性についても説明している。
 
-以下はすべて2026-09-17にcurlで取得し、本文を直接確認した（現行版）。
-
-### 1. 一般枠は15GB・共有プール（日英同一記載）
-
-> You get up to 15 GB of storage or you can buy more.
-
-> 利用できる保存容量は最大 15 GB です。容量は追加購入することもできます。
-
-- https://support.google.com/photos/answer/10100180 （B/D）
-- https://support.google.com/photos/answer/10100180?hl=ja （B/D）
-
-### 2. Pixel 5以前は無制限が現行生存
-
-> If you have a Pixel phone that is Pixel 5 or earlier, you get unlimited storage for photos and videos backed up from your device at no charge.
-
-> Google Pixel 5 以前の Google Pixel をお使いの場合、そのデバイスから無制限ストレージに写真と動画を無料でバックアップできます。
-
-「無制限」という語は撤廃されず、**端末コホート限定で現行ヘルプに存在し続けている**。
-
-- 同上（B/D）
-
-### 3. 2021年6月1日前のアップロードは恒久除外（経過措置）
-
-> Any photos or videos backed up in High quality or Express quality before June 1, 2021 don't count on your Google Account storage.
-
-> 2021 年 6 月 1 日より前に高画質またはエクスプレス画質でバックアップした写真と動画は、Google アカウントの保存容量にカウントされません。
-
-同一アカウント内で、**アップロード日によって別レジーム**が適用される。
-
-- 同上（B/D）
-
-### 4. ラベル改称: 高画質 → 保存容量の節約画質
-
-> Storage saver (previously named high quality)
-
-> 保存容量の節約画質（旧称「高画質」）
-
-- https://support.google.com/photos/answer/9284827 （ Manage your storage / B）
-- 10100180 日本語版（B）
-
-改称により「画質」の語は残ったが「高」が消え、さらに「Express quality」という別階層が増えた。**ラベルの数が増えるほど「無制限」の記憶と対応付けにくくなる**構造。
-
-### 5. 保持ポリシー側の削除条件
-
-> Google フォトを 2 年以上使用していない場合や、保存容量を使い切った場合は、写真と動画が削除される可能性があります。
-
-- https://support.google.com/photos/answer/10100180?hl=ja （D）
-
-「無料保存」と「削除される可能性」が同一ページに併存する。
-
----
-
-## Timeline / Source Drift issue
+したがって、
 
 ```text
-〜2021-05-31  「無制限・無料」（高画質）        ← 旧マーケの記憶の根拠
-2021-06-01     一般枠15GBへ。旧アップロードは恒久除外（コホート断層）
-2021〜         「高画質」→「保存容量の節約画質」改称 / Express画質追加
-現行           Pixel 5以前は無制限の記述が生存 / 旧マーケURLは消失・404
+quota exemption
+!=
+permanent retention guarantee
 ```
 
-- 2020年11月の制度変更告知ブログ（blog.google）は、複数の推定URLが本ラウンドで404。**告知ページ自体がURL漂移**しており、「旧約束の原文」を公式一次で引けなくなる構造が生じている。
-- Internet Archiveが一時的オフラインだったため、旧マーケページ（"free unlimited photo storage"）のアーカイブ原文は本ラウンドでは再検証できず → Unresolved。
+である。
 
 ---
 
-## Contradiction Matrix
+## Claim Dimensions
 
-| 観察 | H4 コホート | H5/H6 新旧併存 | H10 別概念 | H1 改称 |
-|---|---:|---:|---:|---:|
-| 一般=15GB（現行明記） | ◎ | - | - | - |
-| Pixel 5以前=無制限（現行明記） | ◎ | - | ◎ | - |
-| 2021-06-01前=カウント除外（現行明記） | ○ | ◎ | ◎ | - |
-| 「高画質」ラベル消滅・節約画質へ | - | ○ | - | ◎ |
-| 旧告知ブログURL消失 | - | ○ | - | - |
+「無料」「無制限」「残る」を一つの次元として扱わない。
+
+```text
+account_quota          アカウント保存容量の総枠
+quota_counting         個々の写真・動画が容量計算に入るか
+upload_entitlement     特定端末から無制限アップロードできるか
+backup_quality         元の画質 / 保存容量の節約画質等
+upload_date            いつバックアップされたか
+device_cohort          どのPixel世代か
+retention_policy       コンテンツが保持される条件
+activity_policy        非アクティブ時の扱い
+```
+
+特に、
+
+```text
+容量にカウントされない
+!=
+削除されないことが永久に保証される
+```
+
+---
+
+## Governing evidence
+
+### 現行の一般枠
+
+Google公式ヘルプは、各Googleアカウントで最大15GBの保存容量を利用でき、その容量がGmail、Google Drive、Google Photosで共有されると説明している。
+
+- issuer: Google
+- function: explanatory / operational
+- object_level: Google account storage policy
+- valid_at: 2026-09-17
+- source: https://support.google.com/photos/answer/10100180?hl=ja
+
+このHelpページは公式一次情報だが、契約条項そのものと決めつけて `normative` と扱わない。
+
+---
+
+### 2021年6月1日前の対象バックアップ
+
+同ページは、2021年6月1日より前に高画質またはエクスプレス画質でバックアップした写真・動画はGoogleアカウントの保存容量にカウントされない、と現行形で説明している。
+
+確認できるのは**現在のquota-counting rule**であり、将来不変の永久保証ではない。
+
+---
+
+### Pixel 5以前
+
+同ページは、Pixel 5以前のGoogle Pixelについて、そのデバイスから無制限ストレージに写真と動画を無料でバックアップできると説明している。
+
+ただし、旧版は「Pixel 5以前」を一つの均一なコホートとして扱いすぎていた。
+
+実際には、端末世代・バックアップ画質・時期によって条件が細分される可能性があるため、詳細比較を行う場合は次の粒度まで下げる必要がある。
+
+```text
+Pixel model
+× backup quality
+× upload date
+```
+
+本ケースでは、現行の概要ヘルプで直接確認できる範囲をConfirmedとし、Pixel各世代の詳細マトリクスは別途一次資料で確認するまで過剰に一般化しない。
+
+---
+
+## Timeline / Source Drift
+
+```text
+〜2021-05-31
+一般ユーザーにも「高画質」等で容量カウントされない運用が存在
+
+2021-06-01
+一般の新規バックアップについて保存容量ポリシー変更
+
+現行
+一般枠は15GB共有
+旧対象バックアップは現行ルール上カウント対象外
+Pixel 5以前について無制限バックアップ案内が残る
+```
+
+旧マーケティングページや制度変更告知のURLは、現在のヘルプ構造から直接再現できないものがあるため、過去の広告表現を引用する場合はアーカイブ等で別途保全する。
 
 ---
 
 ## Current conclusion
 
-### 確認済み事実
+### Confirmed
 
-- 「無制限」は2021-06-01に一般枠では撤廃（15GB・共有プール）。
-- ただし同一ヘルプページ上で、Pixel 5以前（無制限）と2021-06-01前アップロード（恒久除外）という**2つの生存した無制限コホート**が現行明記されている。
-- ラベルは「高画質→保存容量の節約画質」に改称され、Express画質が追加された。
-- 保持ポリシーには2年非使用・容量超過時の削除条件がある。
+- 現行Google Photos Helpでは、一般アカウントの保存容量はGoogleアカウントの最大15GB共有枠として説明されている。
+- 2021年6月1日より前に対象画質でバックアップした写真・動画は、現行ポリシー上Googleアカウント保存容量にカウントされない。
+- Pixel 5以前について、現行ヘルプは無制限ストレージへの無料バックアップを案内している。
+- 同じ「無制限」「無料」でも、account quota / quota counting / device entitlement / backup quality / upload date は別次元。
 
-### まだ言えないこと
+### Not confirmed
 
-```text
-旧マーケ「free unlimited」の原文アーカイブ（IAオフライン）
-2020年告知の正確なURLと告知文言
-Pixel 6以降の「元の画質」特典の有無・期間（本ラウンド未検証）
-```
+- 旧対象バックアップが「将来にわたり永久に」容量カウント除外され続けること。
+- 容量カウント除外が「永久保持」を意味すること。
+- Pixel 5以前のすべての世代・画質・期間が同一条件であること。
 
 ### Confidence
 
-**コホート分裂構造はConfirmed。旧約束の原文特定はUnresolved。**
+**Confirmed for the current cohort split; long-term permanence and detailed Pixel sub-cohorts remain Unresolved unless separately sourced.**
 
 ---
 
-## What would resolve it
+## Falsification
 
-1. Internet Archive復帰後の旧マーケページ（about.google/products/photos、photos.google.com）の2020年時点スナップショット
-2. 2020-11-11告知の現行存活URL（blog.google検索インデックス）
-3. Pixel 6/7/8世代の元画質バックアップ特典の現行条件（Google One側ヘルプ）
+この結論を覆し得るもの:
+
+1. Google公式の現行資料が、旧対象バックアップを保存容量へ再びカウントすると明示する。
+2. Pixel 5以前の概要記述を具体化する公式資料が、特定世代について条件を否定・限定する。
+3. 「容量カウント対象外」と「永久保持」を同義とする明示的なGoogleの保証文言が見つかる。
+
+3が見つからない限り、quota exemptionからretention guaranteeを推論しない。
 
 ---
 
 ## Why this case matters
 
-このケースは `institutional-forensics` の**Scope / Cohort × Legacy / Transition**の中核デモである。
+このケースは、制度フォレンジックに次の失敗モードを追加した。
 
 ```text
-「無制限は終わった」と言ってはいけない
-→ Pixel 5以前では終わっていない（現行明記）
-→ 2021年6月1日前の分は永久に終わっていない（恒久除外）
-
-「無制限だと言ってはいけない」
-→ 一般の新規アップロードは15GB
+現行状態を確認する
+↓
+その状態を「永久」「恒久」に昇格する
+↓
+隣接する別dimension（保持・削除）まで保証されたと誤読する
 ```
 
-同一プロダクト・同一ページ内でコホートごとに答えが違うとき、**単一のyes/noは構造上存在しない**。問われたら最初に返すべき答えは
+必要なのは新しいSTEPではなく、Claim DimensionsとFalsificationを厳密に使うこと。
 
 ```text
-「どのコホートの、どの次元の無制限ですか？」
-```
+current state
+!=
+permanent promise
 
-である。これは telecom-unlimited と同じ次元分解機構の**コホート併存版**であり、さらに「告知URL自体が漂移する」というSource Driftの二次被害まで含んでいる。
+quota exemption
+!=
+retention guarantee
+```
