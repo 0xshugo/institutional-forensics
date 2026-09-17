@@ -196,7 +196,9 @@ all historical subscriber conditions
 
 ## 9. Definition of Done
 
-通信約款調査は、最低でも以下が揃えば完了。
+共通の完了条件は **`tests/VALIDATOR_CHECKLIST.md`** を満たすこと（Premise・反証・否定命題などはそちらに集約）。
+
+通信約款調査は、上記に加え最低でも以下が揃えば完了。
 
 - プランと基準日が固定されている
 - Document Stackが作られている
@@ -206,4 +208,3 @@ all historical subscriber conditions
 - テザリング・海外など別scopeを確認している
 - 新旧条件を混同していない
 - marketing / contract / operationを分離している
-- 反証可能性を提示している

@@ -304,24 +304,9 @@ Operation / enforcement
 
 # 7. Validator
 
-出力前に必ず自己検査する。
+出力前に共通チェックリストで自己検査する。必須項目・決定的否定命題・永久表現・FAIL条件の全文は **`tests/VALIDATOR_CHECKLIST.md`** を参照（ここでは重複掲載しない）。
 
-```text
-[ ] Premise status がある
-[ ] 主要Sourceに issuer がある
-[ ] 主要Sourceに function がある
-[ ] 比較対象の object_level が確認されている
-[ ] 時点差が重要なら valid_at がある
-[ ] Claimが曖昧ならdimension分解されている
-[ ] Confirmedの根拠がF単独ではない
-[ ] 反証条件が1つ以上ある
-[ ] 「存在しない / 一度もない / only / never」等の決定的否定命題を別途反証した
-[ ] current state を permanent promise に昇格していない
-[ ] 隣接dimension（例: quota と retention）を混同していない
-[ ] Unresolvedを許容している
-```
-
-1つでも重大な欠落があれば、Confidenceを下げるか調査を追加する。
+重大な欠落があれば、Confidenceを下げるか調査を追加する。
 
 ---
 

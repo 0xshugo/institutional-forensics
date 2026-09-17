@@ -111,3 +111,7 @@ v0.1.5 therefore strengthens:
 3. separation of adjacent dimensions (quota/retention, notice/limitation/warranty).
 
 This preserves the v0.1.3 design goal: **short enough to run consistently, strict enough to fail when evidence structure is missing.**
+
+## v0.1.6 regression note
+
+The old-law anchor work in `examples/applecare-warranty-layers.md` re-exercised existing validator rules (decisive negative / working-hypothesis falsification, adjacent-dimension separation). No new checklist items were required; `tests/VALIDATOR_CHECKLIST.md` remains the single canonical DoD for v0.1.6.
