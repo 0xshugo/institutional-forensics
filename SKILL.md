@@ -1,7 +1,7 @@
 ---
 name: institutional-forensics
 description: 見かけ上の矛盾・重複・不整合を、前提・文書機能・意味次元・反証の最小必須パスで検証し、必要時だけ例外・時系列・運用へ展開するEvidence-first Skill。
-version: 0.1.5
+version: 0.1.6
 language: ja
 status: experimental
 ---

@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.1.6] - 2026-09-17
+
+Old-law verification patch: resolved the pre-2017 anchor of the "one year" folk claim with primary-text evidence.
+
+### Added
+
+- `examples/applecare-warranty-layers.md`
+  - new subsection `旧法の「1年」— 通説の歴史的アンカー`: former Art. 570 applied former Art. 566(3) mutatis mutandis, giving a **one-year exercise period from discovery** for hidden-defect rescission and damages under the pre-2017 Civil Code
+  - source: official former Law Data Providing System text crawl (2013-12-21, GitHub archive, evidence class E), cross-checked against current consolidated text via e-Gov API v2
+
+### Fixed
+
+- `examples/applecare-warranty-layers.md`
+  - rejected the v0.1.4 working hypothesis of a **six-month** pre-2017 rule: full-text check of the pre-2017 sales/warranty articles found no six-month period anywhere — the folk "one year" was a correct citation of the old law, and the secondary folk error was our own hypothesis
+  - reframed the conclusion: the error is staleness (old exercise period presented as current) and conflation with Apple's contractual one-year warranty, not the number itself
+
+### Reason
+
+- unresolved item #2 (old Civil Code text) was resolved via `riywo/law.e-gov.go.jp` crawl after Wayback Machine stayed offline and the e-Gov API served only the current consolidation
+- demonstrates the skill's own rule: decisive negative claims **and working hypotheses** are both falsification targets
+
 ## [0.1.5] - 2026-09-17
 
 Correction and validator-hardening patch driven by factual errors found in the v0.1.4 sample expansion.

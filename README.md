@@ -2,7 +2,7 @@
 
 Evidence-first Skill for investigating contradictions in rules, contracts, policies, specifications, and real-world operations.
 
-**Version:** v0.1.5 — experimental
+**Version:** v0.1.6 — experimental
 
 > Verify the contradiction before explaining it.
 
@@ -153,6 +153,7 @@ Tested so far:
 5. telecom regression after Document Function / Claim Dimensions changes
 6. warranty-layer case: AppleCare + Japanese Civil Code / EU directive; v0.1.4 factual overreach corrected in v0.1.5
 7. Google Photos storage sunset: cohort coexistence; permanence overreach corrected in v0.1.5
+8. old-law anchor verification: pre-2017 Civil Code full-text check resolved the "one year" folk claim's true source (former Art. 566(3) via former Art. 570) and rejected our own six-month hypothesis
 
 ## Contribution direction
 
