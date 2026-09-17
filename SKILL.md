@@ -1,7 +1,7 @@
 ---
 name: institutional-forensics
 description: 見かけ上の矛盾・重複・不整合を、前提・文書機能・意味次元・反証の最小必須パスで検証し、必要時だけ例外・時系列・運用へ展開するEvidence-first Skill。
-version: 0.1.4
+version: 0.1.5
 language: ja
 status: experimental
 ---
@@ -17,6 +17,8 @@ Verify the contradiction before explaining it.
 Compare dimensions, not labels.
 Official != same function.
 Confirmed must not rest on inference alone.
+A refutation also needs falsification.
+Current state != permanent promise.
 ```
 
 ---
@@ -96,9 +98,22 @@ historical    過去時点の状態を示す
 
 無料
 → 初期費用 / 月額 / 従量 / 条件付き割引 / 期間限定 / 還元
+
+保証
+→ 法定救済 / 通知期間 / 時効 / 商用保証 / サービス契約
+
+保存
+→ quota counting / upload entitlement / retention / deletion policy
 ```
 
 比較はラベル同士ではなく、正規化したdimension同士で行う。
+
+特に次を禁止する。
+
+```text
+current state → permanent promise への無根拠な昇格
+quota exemption → retention guarantee への無根拠な横滑り
+```
 
 ---
 
@@ -112,6 +127,27 @@ historical    過去時点の状態を示す
 この説明が誤りなら、どんな一次資料が存在するはずか？
 どんな事例が見つかれば、この結論は覆るか？
 ```
+
+### Decisive negative claims
+
+次のような強い否定・排他命題は、最終結論と同じくらい厳しく反証する。
+
+```text
+存在しない
+一度もない
+唯一
+only
+never
+no rule
+```
+
+必要なら:
+- 一次資料全文を検索
+- 隣接条文・附則・別表を確認
+- 同じ制度の関連法・特別法を確認
+- 別Document Functionの資料に反例がないか確認
+
+**誤った通説を否定しただけで、代替説明が正しいことにはならない。**
 
 反証確認後にのみ結論を出す。
 
@@ -139,7 +175,7 @@ historical    過去時点の状態を示す
 
 ## Scope / Cohort
 
-地域、対象者、加入時期、旧契約者、新規契約者などで条件が違うとき。
+地域、対象者、加入時期、旧契約者、新規契約者、端末世代などで条件が違うとき。
 
 ## Timeline / Source Drift
 
@@ -248,6 +284,7 @@ Established / Partially established / Not established / Refuted
 
 ## Falsification
 何が見つかれば結論が覆るか。
+決定的な否定命題がある場合、その反証確認も記録。
 
 ## Unresolved
 未確認事項。
@@ -278,6 +315,9 @@ Operation / enforcement
 [ ] Claimが曖昧ならdimension分解されている
 [ ] Confirmedの根拠がF単独ではない
 [ ] 反証条件が1つ以上ある
+[ ] 「存在しない / 一度もない / only / never」等の決定的否定命題を別途反証した
+[ ] current state を permanent promise に昇格していない
+[ ] 隣接dimension（例: quota と retention）を混同していない
 [ ] Unresolvedを許容している
 ```
 
@@ -293,10 +333,6 @@ Operation / enforcement
 楠上第二住宅2号棟は棟番号特例で2-1-2になった。
 ```
 
-問題:
-- 個別付番記録を確認していない
-- 前提未確定なのに制度説明を確定扱い
-
 GOOD:
 
 ```text
@@ -309,15 +345,37 @@ GOOD:
 基本約款に200GB制限がないので、このプランは完全無制限。
 ```
 
-問題:
-- プラン固有条件、料金表、重要事項説明を見ていない
-- 「無制限」のdimensionが未分解
-
 GOOD:
 
 ```text
 固定容量閾値と、混雑時制御・速度制御を別dimensionとして確認し、必要なDocument Stackを辿る。
 ```
+
+## BAD 3 — 通説の反証から新しい過剰一般化を作る
+
+```text
+「法定保証1年」は誤り → 売買には1年の規定は存在しない。
+```
+
+GOOD:
+
+```text
+購入日起点の商用保証と、民法566条の通知期間、166条の消滅時効を別dimensionとして確認する。
+```
+
+## BAD 4 — 現在の扱いを永久保証と読む
+
+```text
+現在カウント対象外 → 永久にカウントされず永久保存される。
+```
+
+GOOD:
+
+```text
+現行のquota ruleだけをConfirmedとし、将来不変性とretentionは別途確認する。
+```
+
+詳細: `examples/anti-patterns.md`
 
 ---
 
@@ -332,13 +390,14 @@ GOOD:
 1. Premiseを検証
 2. 主要SourceのDocument Functionを分類
 3. 曖昧なclaimを必要なdimensionへ分解
-4. 有力説明の反証を探す
+4. 有力説明と、その説明を支える強い否定命題の反証を探す
 
 必要な場合だけ、例外、scope/cohort、timeline/source drift、operation/enforcement、legacyを追加調査してください。
 
 主要Sourceごとに最低限 issuer / function / object_level / valid_at / source を記録してください。
 
 ConfirmedはF（推定・観測）単独では認めません。
+現行状態から「永久」を推定しないでください。
 証拠不足ならUnresolvedを選んでください。
 
 最後にvalidatorを実行してください。
@@ -368,6 +427,7 @@ modules/telecom-contracts.md
 欠落がvalidatorで分かる
 事実と仮説が分かれる
 反証可能
+否定命題も反証済み
 第三者が追試できる
 Unresolvedで止まれる
 ```
