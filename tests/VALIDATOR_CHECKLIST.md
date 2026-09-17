@@ -1,6 +1,6 @@
 # Institutional Forensics Validator Checklist
 
-Version: v0.1.3
+Version: v0.1.5
 
 Use this checklist before accepting an investigation result.
 
@@ -15,7 +15,56 @@ Use this checklist before accepting an investigation result.
 [ ] Ambiguous claims are decomposed into dimensions
 [ ] Confirmed is not supported by Class F evidence alone
 [ ] At least one falsification condition is stated
+[ ] Decisive negative/exclusive claims were separately falsified
+[ ] Current state was not promoted to a permanent promise without explicit evidence
+[ ] Adjacent dimensions are not conflated (e.g. quota != retention, notice period != limitation period)
 [ ] Unresolved remains an allowed outcome
+```
+
+## Decisive negative claim check
+
+If the result contains claims such as:
+
+```text
+存在しない
+一度もない
+唯一
+only
+never
+no rule
+```
+
+require at least one of the following before accepting them as Confirmed:
+
+```text
+[ ] full-text search of the governing primary source
+[ ] inspection of adjacent provisions / appendices / transitional clauses
+[ ] check for special laws or related governing documents
+[ ] explicit primary-source statement supporting the absence/exclusivity claim
+```
+
+A successful refutation of the user's premise does **not** automatically validate the replacement explanation.
+
+## Permanence / neighboring-dimension check
+
+Before using words such as:
+
+```text
+永久
+恒久
+always
+permanent
+guaranteed forever
+```
+
+verify that the source actually establishes duration, not merely current status.
+
+Examples:
+
+```text
+current quota exemption != permanent retention guarantee
+1-year notice period != 1-year commercial warranty
+limitation period != warranty period
 ```
 
 ## Failure policy
@@ -27,6 +76,9 @@ Use this checklist before accepting an investigation result.
 - Missing issuer/function for a major source → WARN or FAIL depending on impact
 - Missing valid_at where historical/current conditions may differ → FAIL
 - No falsification condition → FAIL
+- Strong negative claim not separately checked → FAIL
+- Current state promoted to permanence without explicit source → FAIL
+- Adjacent dimensions conflated in a decisive conclusion → FAIL
 
 ## Confidence downgrade rule
 
