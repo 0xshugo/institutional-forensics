@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.1.3] - 2026-09-17
+
+Execution-cost and validation patch driven by an external audit of the v0.1.2 method.
+
+### Added
+
+- compact mandatory fast path: Premise → Document Function → Claim Dimensions → Falsification
+- explicit `tests/VALIDATOR_CHECKLIST.md`
+- compact `examples/anti-patterns.md`
+- minimal required Evidence Identity fields
+- contributor-facing Definition of Done
+
+### Changed
+
+- Evidence Identity Tuple required fields reduced to `issuer / function / object_level / valid_at / source`
+- exception, scope/cohort, timeline/source drift, operation/enforcement, legacy and implementation checks are now conditional expansions rather than always-on steps
+- Agent Prompt shortened substantially to reduce instruction dilution
+- README redesigned around trigger / fast path / DoD / validation status
+- common core frozen against unnecessary domain-specific growth; new domain knowledge should prefer modules
+
+### Reason
+
+The method had become increasingly capable but also increasingly expensive to execute. The audit found that the next quality step was not adding more reasoning stages, but making the method shorter and making omissions mechanically visible.
+
+The v0.1.3 design goal is:
+
+> short enough to run consistently, strict enough to fail when evidence structure is missing.
+
+---
+
 ## [0.1.2] - 2026-09-17
 
 Cross-domain patch driven by a blind test against current Japanese mobile-carrier contract and plan documentation.
