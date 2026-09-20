@@ -29,6 +29,12 @@ Premise
 
 Only expand into exceptions, scope/cohort, timeline/source drift, operation/enforcement, legacy, or implementation issues when needed.
 
+## Install & layout
+
+1. Use a folder named **`institutional-forensics`** — it must match the Skill frontmatter `name:` in [`SKILL.md`](SKILL.md).
+2. Place that folder under your Cursor skills path, for example **`.cursor/skills/institutional-forensics/`** (or the equivalent skills directory in your environment).
+3. Keep **`SKILL.md` at the skill root** and leave **`modules/` beside it** (same directory as `SKILL.md`). Do not move module files away from the skill root or rename the skill folder without updating `name:`.
+
 ## Definition of Done
 
 A result is acceptable only when every item in the canonical checklist passes: [`tests/VALIDATOR_CHECKLIST.md`](tests/VALIDATOR_CHECKLIST.md).

@@ -385,23 +385,17 @@ ConfirmedはF（推定・観測）単独では認めません。
 現行状態から「永久」を推定しないでください。
 証拠不足ならUnresolvedを選んでください。
 
-最後にvalidatorを実行してください。
+セルフチェックは tests/VALIDATOR_CHECKLIST.md を開いて照合する。
+日本の住所・地番・住居表示、または携帯/通信契約が対象なら、調査開始時に modules/jp-address.md または modules/telecom-contracts.md を読む。
+
+最後に validator（上記 checklist）を実行してください。
 ```
 
 ---
 
 # 10. Domain Modules
 
-現在:
-
-```text
-modules/jp-address.md
-modules/telecom-contracts.md
-```
-
-コアを増やす前に、ドメイン固有知識はmodule側へ寄せる。
-
-次の新規moduleは一度に1本だけ追加し、共通SKILLの変更が本当に必要かを先に検証する。
+ドメイン固有の手順は `modules/` に置く。いつ読むかは **§9**、追加方針は README の **Contribution direction** を参照。
 
 ---
 
