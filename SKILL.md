@@ -407,12 +407,4 @@ modules/telecom-contracts.md
 
 # 11. Definition of Done
 
-```text
-短く走れる
-欠落がvalidatorで分かる
-事実と仮説が分かれる
-反証可能
-否定命題も反証済み
-第三者が追試できる
-Unresolvedで止まれる
-```
+調査結果として受け入れ可能なのは、正本チェックリスト **`tests/VALIDATOR_CHECKLIST.md`** の全項目を満たす場合のみ（§7 と同じ。ここでは項目を重複掲載しない）。
