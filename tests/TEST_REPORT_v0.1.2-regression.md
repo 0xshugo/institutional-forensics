@@ -1,5 +1,7 @@
 # Test Report — v0.1.2 Telecom Regression
 
+**Status:** Historical regression archive (skill v0.1.6). Current DoD: [`tests/VALIDATOR_CHECKLIST.md`](./VALIDATOR_CHECKLIST.md).
+
 Date: 2026-09-17 JST
 Skill version: v0.1.2
 Domain: Japanese mobile telecom contracts

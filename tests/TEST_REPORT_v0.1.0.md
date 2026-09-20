@@ -1,5 +1,7 @@
 # Institutional Forensics v0.1.0 Test Report
 
+**Status:** Historical regression archive (skill v0.1.6). Current DoD: [`tests/VALIDATOR_CHECKLIST.md`](./VALIDATOR_CHECKLIST.md).
+
 Date: 2026-09-17  
 Target: `SKILL.md` v0.1.0  
 Method: one regression case + two cross-domain generalization cases
@@ -163,6 +165,8 @@ v0.1.0 has a useful core structure and generalized successfully outside the addr
 > The skill can explain a contradiction before proving that the contradiction actually exists in authoritative evidence.
 
 ## Required v0.1.1 changes
+
+Historical: shipped in v0.1.1+; listed here for regression context, not open work.
 
 1. Add a mandatory **STEP -1 — Premise Validation**.
 2. Require an **Object Granularity Check** (system / facility / building / unit / account / contract, etc.).
