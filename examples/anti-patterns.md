@@ -125,3 +125,49 @@ volume / high-speed volume / throttling / window / tethering / geography
 現行ポリシーでは対象バックアップは容量にカウントされない。
 将来不変か、永久保持されるかは別dimensionであり、明示的な保証がなければ断定しない。
 ```
+
+---
+
+## Anti-pattern 7 — Timing correlation is treated as identity
+
+### BAD
+
+```text
+Two domains entered clientHold six seconds apart; therefore the same registrar customer account controls both.
+```
+
+### Why it fails
+
+- The status is registrar-set; an upstream batch enforcement action can create the same pattern.
+- A public status-change timestamp is not the registrar's customer account record.
+
+### GOOD
+
+```text
+The timing is an investigative lead. Same-account control is Unresolved until authorized registrar logs or other independent evidence confirm it.
+```
+
+---
+
+## Anti-pattern 8 — Mirrors and document metadata become a perpetrator
+
+### BAD
+
+```text
+Three sites repeat the same log; WPS fields match; a certain IP geolocates to one prefecture. The offender and team size are confirmed.
+```
+
+### Why it fails
+
+- Reposts of one actor-controlled log are dependent, not independent.
+- OOXML custom metadata may be copied or edited.
+- IP/ASN/PTR identifies network administration at most, not a human user.
+- One individual can use many devices and environments.
+
+### GOOD
+
+```text
+Separate artifact similarity, account linkage, device/actor attribution and people count. Record Unresolved where raw, independent, authorized evidence is absent.
+```
+
+See `modules/osint-artifact-correlation.md` and `examples/gmo-osint-public-claims-2026.md`.
