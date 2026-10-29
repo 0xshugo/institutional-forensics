@@ -1,7 +1,7 @@
 # Case Study — GMO incident: public OSINT correlation claims without false attribution
 
 **Case status:** public-claim verification / **attribution unresolved**  
-**Skill:** institutional-forensics + \`modules/osint-artifact-correlation.md\`  
+**Skill:** institutional-forensics + `modules/osint-artifact-correlation.md`  
 **Review date:** 2026-10-29 (JST)  
 **Safety:** public, redacted, no attacker-host access or leaked data
 
@@ -15,9 +15,9 @@ This case evaluates the **evidence reasoning** of the published report; it does 
 
 - GMO publicly reported an unauthorized-access incident affecting Onamae.com Desktop Cloud and launched a cybercrime-bounty reporting channel on 2026-10-28. The official notice asks for concrete, verifiable information, and for facts and inferences to be separated.
 - GMO warns that alleged attacker-controlled leak pages can collect visitor information, and requests **no access to those pages and no spread of leaked data**.
-- ICANN documents \`clientHold\` as a domain status set by a registrar, restricting DNS publication.
-- The CDX specification identifies archive \`timestamp\` as **capture time**, not creation time.
-- OOXML \`docProps/custom.xml\` contains document property values and is not intrinsically a cryptographic author credential.
+- ICANN documents `clientHold` as a domain status set by a registrar, restricting DNS publication.
+- The CDX specification identifies archive `timestamp` as **capture time**, not creation time.
+- OOXML `docProps/custom.xml` contains document property values and is not intrinsically a cryptographic author credential.
 
 These official/technical facts do not by themselves verify the external investigator's specific measurements.
 
@@ -35,7 +35,7 @@ These official/technical facts do not by themselves verify the external investig
 | --- | --- | --- | --- | --- | --- |
 | Incident report / bounty notice | GMO Internet | official incident notice; explanatory / operational (D) | incident & response | 2026-10-27/29 | Confirms case and safety policy, not suspect identity |
 | Technical OSINT publication | public investigator's account, redistributed online | self-report / investigation commentary (E for narrative; F for its unverified inferences) | purported artifacts | 2026-10 (posted) | No source logs or original document bytes were inspected here |
-| EPP status guide | ICANN | technical explanatory standard (D) | domain registration | consulted 2026-10-29 | Defines \`clientHold\`; no proof of same Namecheap login |
+| EPP status guide | ICANN | technical explanatory standard (D) | domain registration | consulted 2026-10-29 | Defines `clientHold`; no proof of same Namecheap login |
 | CDX description | Library of Congress | format documentation (D) | archive capture | consulted 2026-10-29 | Capture time is not necessarily content/event time |
 | Open XML custom properties guidance | Microsoft | technical explanatory (D) | document metadata | consulted 2026-10-29 | Custom metadata can be edited/copied; not a verified unique author ID |
 | SP 800-86 | NIST | forensic process guidance (D) | investigative process | 2006 publication | Collection/integrity guidance, not case attribution |
@@ -44,34 +44,34 @@ These official/technical facts do not by themselves verify the external investig
 
 | Published observation (not independently reproduced here) | Narrow defensible interpretation | Forbidden leap | At least one alternative / disproof |
 | --- | --- | --- | --- |
-| Two \`clientHold\` times differ by six seconds | Closely timed registrar state changes, **if archived event semantics verified** | Same customer account proven | Registrar batch abuse takedown / timestamp reflects provider update; need registrar audit |
+| Two `clientHold` times differ by six seconds | Closely timed registrar state changes, **if archived event semantics verified** | Same customer account proven | Registrar batch abuse takedown / timestamp reflects provider update; need registrar audit |
 | Repeated apparent PHP–Wayback time offset (15 of 15 samples) | Time conversion model fits the claimed samples | Author's timezone, origin or device location confirmed | Crawler latency, common source clock, publication vs capture timestamp |
 | HTTP logs show an alleged 39-burst QA-like pattern | Apparent automated/test behavior, **if provenance established** | That IP is the attacker or specific operating device | Public scanner, investigator, shared NAT/proxy, fabricated/injected entries |
-| Equal WPS custom \`ICV\` field values / creator labels | Metadata values match; potential grouping lead | Uniquely same human, account or workstation | Copied templates, shared export tool, editable properties; need vendor semantics and independent chain |
+| Equal WPS custom `ICV` field values / creator labels | Metadata values match; potential grouping lead | Uniquely same human, account or workstation | Copied templates, shared export tool, editable properties; need vendor semantics and independent chain |
 | PTR and JPNIC allocation shows certain providers | Public network allocation and reverse DNS at query time | Person, street, operator and culpability | Dynamic IP, CGNAT, carrier gateway, VPN, nonauthoritative PTR |
 | CSS/HTML source signatures, file paths, hash algorithms | Code/document family similarities | Same coder or the perpetrator | AI generation, widely copied code, tool defaults |
 | Multiple software stacks / simultaneous activity | Multiple environments reported | Exactly 2–4 people involved | One operator controlling many virtual devices, shared automation |
 
 ### Key technical correction
 
-\`WHOIS/RDAP + 6-second clientHold\` is **not proof** of the same Namecheap *customer account*. It is a useful provider inquiry lead. Only appropriately authorized registrar-side account/change logs, or independent authenticated evidence, could upgrade the attribution.
+`WHOIS/RDAP + 6-second clientHold` is **not proof** of the same Namecheap *customer account*. It is a useful provider inquiry lead. Only appropriately authorized registrar-side account/change logs, or independent authenticated evidence, could upgrade the attribution.
 
 Likewise, a claim that all samples reproduce a salt-derived hash proves only a reproducible **mapping under the proposed formula**. It does not establish the person behind a request; avoid inversion/doxxing.
 
 ## Claim Dimensions and attribution ladder
 
-\`\`\`text
+```text
 L0 published assertion
 L1 artifact or event independently authenticated
 L2 a correlation between artifacts established
 L3 an administrative account/controller linked
 L4 an operator/device linked by independent records
 L5 an individual / organization proven with authorized evidence
-\`\`\`
+```
 
 Current independent verification of **specific alleged artifacts** is L0. The generic method is valid as an investigative approach; the **same-actor conclusion is unresolved**.
 
-\`Same registrar\` ≠ \`same registrar account\` ≠ \`same administrator\` ≠ \`same operator\` ≠ \`same individual\`.
+`Same registrar` ≠ `same registrar account` ≠ `same administrator` ≠ `same operator` ≠ `same individual`.
 
 ## Failure modes discovered
 
