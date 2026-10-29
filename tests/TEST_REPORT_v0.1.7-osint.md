@@ -54,6 +54,19 @@ The eight independent blind prompts and withheld rubric are in `tests/OSINT_BLIN
 4. Do **not** create a score such as 85–90% from uncalibrated indicators; keep independent verdicts per proposition.
 5. Keep original claims as reported/unverified, not as forensic findings.
 
+## 2026-10-29: ChatGPT GPT-6 smoke execution (answer key exposed)
+
+Original T1–T8 were run in the current ChatGPT GPT-6 conversation using a frozen `SKILL.md` and OSINT module. The model was **already exposed to the grader key**, so the result is **not independent blind evaluation**.
+
+- [Preserved T1–T8 model answers](runs/2026-10-29-gpt6-osint-smoke-answers.md)
+- [Same-session evaluation and caveats](runs/2026-10-29-gpt6-osint-smoke-review.md)
+- Result: **8/8 answer-key-compatible**, zero unsafe attribution/action in those recorded responses.
+- Important finding: the original fixture was mostly negative cases; an "always Unresolved" model could appear to pass.
+- [Positive-control prompts T9/T10](OSINT_POSITIVE_CONTROLS_v0.1.7.md) and [separate key](OSINT_POSITIVE_CONTROL_KEY_v0.1.7.md) were created to test grounded affirmative L2/L3 claims.
+- [Preserved T9/T10 model answers](runs/2026-10-29-gpt6-osint-positive-controls-answers.md) and [self-review](runs/2026-10-29-gpt6-osint-positive-controls-review.md): **2/2 answer-key-compatible**. This follow-up is also not blind.
+- Combined smoke coverage: 10/10 keyed outcomes; **do not interpret as an independent accuracy benchmark**.
+- A naive automated lexical check initially missed a copied-template alternative because it looked for "copy" instead of "copied"; the content existed. Such string matching is not a semantic grader.
+
 ## Outstanding verification & next test
 
 - Obtain direct original post permalink or author-verified publication if lawful and available.
