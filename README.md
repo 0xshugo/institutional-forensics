@@ -150,7 +150,14 @@ Tested so far:
 6. warranty-layer case: AppleCare + Japanese Civil Code / EU directive; v0.1.4 factual overreach corrected in v0.1.5
 7. Google Photos storage sunset: cohort coexistence; permanence overreach corrected in v0.1.5
 8. old-law anchor verification: pre-2017 Civil Code full-text check resolved the "one year" folk claim's true source (former Art. 566(3) via former Art. 570) and rejected our own six-month hypothesis
-9. v0.1.7: safe public OSINT source-correlation review and eight **unrun** blind regression prompts; specific actor attribution remains Unresolved
+9. v0.1.7: safe public OSINT source-correlation review; eight synthetic original T1–T8 scenarios plus two positive controls T9–T10. ChatGPT GPT-6 same-session smoke outputs match 10/10 keys, **NOT an independent blind benchmark**. Qwen/Codex hidden-key runs remain pending; specific real-world actor attribution is Unresolved
+
+### GPT-6 smoke run (2026-10-29)
+
+- [T1–T8 responses](tests/runs/2026-10-29-gpt6-osint-smoke-answers.md) and [review](tests/runs/2026-10-29-gpt6-osint-smoke-review.md)
+- [T9–T10 affirmative controls](tests/OSINT_POSITIVE_CONTROLS_v0.1.7.md), [responses](tests/runs/2026-10-29-gpt6-osint-positive-controls-answers.md) and [review](tests/runs/2026-10-29-gpt6-osint-positive-controls-review.md)
+
+The grader was visible to the same model. These logs are **smoke checks**, not blind evidence of generalization. The positive controls test that a sufficiently authenticated account or request-chain correlation can be Confirmed without identifying a person.
 
 ## Contribution direction
 
