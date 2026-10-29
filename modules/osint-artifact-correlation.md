@@ -1,6 +1,6 @@
 # OSINT Artifact Correlation / Attribution Boundaries
 
-**Module:** \`institutional-forensics\` (conditional extension)  
+**Module:** `institutional-forensics` (conditional extension)  
 **Domain:** defensive OSINT / digital forensics / incident reporting  
 **Status:** experimental; no offender identification
 
@@ -10,7 +10,7 @@ Use only when a case asks whether **multiple observed artifacts belong to the sa
 
 The core fast path remains unchanged:
 
-\`Premise → Document Function → Claim Dimensions → Falsification\`.
+`Premise → Document Function → Claim Dimensions → Falsification`.
 
 This module supplies domain-specific checks, not a fifth mandatory stage.
 
@@ -24,20 +24,20 @@ This module supplies domain-specific checks, not a fifth mandatory stage.
 
 ## The attribution ladder: never skip a rung
 
-\`\`\`text
+```text
 L0  A claim was published about an artifact
 L1  The artifact / event is independently verified
 L2  A technical relationship is demonstrated
 L3  Common administrative account or operational control is corroborated
 L4  A device / operator is linked by independent evidence
 L5  A real-world individual / organization is established by authorized evidence
-\`\`\`
+```
 
 Each level needs its own evidence. An L1–L2 finding cannot be described as L3–L5. When raw evidence is unavailable, remain at L0 for the reported artifact even if the analysis is plausible.
 
 Examples of **invalid leaps**:
 
-- six-second \`clientHold\` similarity → same registrar *customer* account
+- six-second `clientHold` similarity → same registrar *customer* account
 - same IP/ASN/PTR → same user or attacker
 - repeated WPS custom metadata → unique author/device
 - common PHP timezone → geographic location/nationality
@@ -48,7 +48,7 @@ Examples of **invalid leaps**:
 
 For a consequential correlation, supplement the core Evidence Identity with:
 
-\`\`\`text
+```text
 artifact_id       redacted identifier, not raw personal data
 acquired_at       when investigator obtained the copy
 observed_at       event time, with timezone and precision
@@ -58,9 +58,9 @@ origin            who emitted the data, who collected it, and who hosted it
 dependency_group  common upstream feed/provider, copied content, mirrored source, generated metadata
 tamper_risk       who could edit the field, and after what event?
 authority         authorization or lawful basis for access/analysis
-\`\`\`
+```
 
-Do not count two mirrors of one underlying log as two independent confirmations. Archive capture time is not automatically content authoring time. WHOIS/RDAP \`updated\` time is not a registrar account ID. Access logs may include researchers, scanners, proxies, NAT/CGNAT, CDN or deliberate decoys.
+Do not count two mirrors of one underlying log as two independent confirmations. Archive capture time is not automatically content authoring time. WHOIS/RDAP `updated` time is not a registrar account ID. Access logs may include researchers, scanners, proxies, NAT/CGNAT, CDN or deliberate decoys.
 
 If precision matters, explicitly write the clock origin, offset, granularity and possible delay. A repeated time offset validates a *conversion model within the tested observations*; it does not establish identity or device location.
 
@@ -71,11 +71,11 @@ If precision matters, explicitly write the clock origin, offset, granularity and
 | Registrar status and timestamps | Registrar action, temporal coincidence | Same customer account / same registrant | Batch abuse enforcement; bulk status update; independent actions |
 | DNS, MX, SPF, hosting | Shared infrastructure or email authorization | Same sender, mailbox, owner or criminal | Shared hosting; reused configuration; spoofing; historical DNS |
 | Wayback/CDX | Capture timestamp and sampled observed page | Content creation moment, owner, local clock setting | Capture lag, cached snapshot, copied page, skew |
-| Server \`visits.log\` | Recorded HTTP requests if authenticity established | The visitor's identity or authorized role | Scanners, defensive analysts, proxies, forged entries |
-| OOXML \`docProps/custom.xml\` | Presence and equality of metadata values | Unique document author, WPS account or device | Copy/template, editing, exporter defaults, spoofing |
+| Server `visits.log` | Recorded HTTP requests if authenticity established | The visitor's identity or authorized role | Scanners, defensive analysts, proxies, forged entries |
+| OOXML `docProps/custom.xml` | Presence and equality of metadata values | Unique document author, WPS account or device | Copy/template, editing, exporter defaults, spoofing |
 | PHP/HTML/CSS patterns | Code-family or style similarity | Same coder / person | Common frameworks, AI assistance, copied template |
 | IP/PTR/WHOIS/JPNIC | Provider / publicly registered allocation | Subscriber, street address, endpoint user | NAT, dynamic allocation, VPN/proxy, organizational edge |
-| File \`mtime\` / certificate issuance | File metadata clock / certificate issuance event | Human activity time / human location | Copy/extract process, skew, automated issuance |
+| File `mtime` / certificate issuance | File metadata clock / certificate issuance event | Human activity time / human location | Copy/extract process, skew, automated issuance |
 
 ## Mandatory falsification in this module
 
@@ -90,7 +90,7 @@ For each proposed **same-* claim**, record:
 
 ## Suggested output (module appendix to the standard output)
 
-\`\`\`text
+```text
 Premise status:
 Claim under test:
 Attribution level observed (L0–L5):
@@ -102,15 +102,15 @@ Disconfirming evidence sought:
 Authorized source needed for escalation:
 Confidence: Confirmed / Highly likely / Plausible / Unresolved
 Safety / redaction:
-\`\`\`
+```
 
 ### Interpretation caution
 
-\`Confirmed\` for a source format or an incident announcement **does not** mean the alleged individual's attribution is confirmed. Record separate confidence per proposition. Unresolved is a valid result and should not be promoted merely because several correlated observations look compelling.
+`Confirmed` for a source format or an incident announcement **does not** mean the alleged individual's attribution is confirmed. Record separate confidence per proposition. Unresolved is a valid result and should not be promoted merely because several correlated observations look compelling.
 
 ## Grounding references (method, not proof of this incident)
 
-- [ICANN — EPP Status Codes](https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en): \`clientHold\` is a registrar-set domain status; it does not expose the registrar customer's internal account.
+- [ICANN — EPP Status Codes](https://www.icann.org/resources/pages/epp-status-codes-2014-06-16-en): `clientHold` is a registrar-set domain status; it does not expose the registrar customer's internal account.
 - [Library of Congress — CDX format](https://www.loc.gov/preservation/digital/formats/fdd/fdd000590.shtml): timestamp describes capture, not authoring.
 - [Microsoft Open XML — custom properties](https://learn.microsoft.com/en-us/office/open-xml/word/how-to-set-a-custom-property-in-a-word-processing-document): properties are fields in an editable OOXML part.
 - [NIST SP 800-86](https://csrc.nist.gov/pubs/sp/800/86/final): handling evidence from multiple systems, files, networks and applications.
