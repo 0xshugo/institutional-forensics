@@ -1,7 +1,7 @@
 ---
 name: institutional-forensics
 description: 見かけ上の矛盾・重複・不整合を、前提・文書機能・意味次元・反証の最小必須パスで検証し、必要時だけ例外・時系列・運用へ展開するEvidence-first Skill。
-version: 0.1.6
+version: 0.1.7
 language: ja
 status: experimental
 ---
@@ -19,6 +19,7 @@ Official != same function.
 Confirmed must not rest on inference alone.
 A refutation also needs falsification.
 Current state != permanent promise.
+Correlation != attribution.
 ```
 
 ---
@@ -192,6 +193,10 @@ no rule
 ## Implementation / Human Error
 
 実装制約、データ不備、単純誤記が候補になるとき。
+
+## Evidence Correlation / Attribution
+
+OSINT・ログ・メタデータなどから「同じアカウント／端末／運用者／人物」と結論する場合のみ、`modules/osint-artifact-correlation.md` を適用する。相関と帰属を区別し、資料の出所が独立か、同一元データのコピーかを評価する。公開資料の一致だけで個人を特定しない。
 
 ---
 
@@ -382,6 +387,7 @@ GOOD:
 主要Sourceごとに最低限 issuer / function / object_level / valid_at / source を記録してください。
 
 ConfirmedはF（推定・観測）単独では認めません。
+同一アカウント・運用者・人物の帰属が問題なら、証拠の独立性と帰属レベルを確認し、相関だけで断定しないでください。
 現行状態から「永久」を推定しないでください。
 証拠不足ならUnresolvedを選んでください。
 
@@ -397,6 +403,7 @@ ConfirmedはF（推定・観測）単独では認めません。
 ```text
 modules/jp-address.md
 modules/telecom-contracts.md
+modules/osint-artifact-correlation.md
 ```
 
 コアを増やす前に、ドメイン固有知識はmodule側へ寄せる。
