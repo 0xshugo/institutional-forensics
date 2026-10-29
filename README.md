@@ -2,7 +2,7 @@
 
 Evidence-first Skill for investigating contradictions in rules, contracts, policies, specifications, and real-world operations.
 
-**Version:** v0.1.6 — experimental
+**Version:** v0.1.7 — experimental
 
 > Verify the contradiction before explaining it.
 
@@ -15,6 +15,7 @@ Use this Skill when something looks inconsistent:
 - a contract says “unlimited”, “free”, or “guaranteed” but conditions exist
 - old and new customers appear to have different treatment
 - the same number or label appears to mean different things
+- OSINT artifacts correlate but a claim escalates from infrastructure similarity to account/operator/person attribution
 
 ## Fast path
 
@@ -82,19 +83,23 @@ field
 ├── LICENSE
 ├── modules/
 │   ├── jp-address.md
-│   └── telecom-contracts.md
+│   ├── telecom-contracts.md
+│   └── osint-artifact-correlation.md
 ├── examples/
 │   ├── kusunokamicho-2-1-2.md
 │   ├── mobile-unlimited-jp-4carriers.md
 │   ├── applecare-warranty-layers.md
 │   ├── google-photos-unlimited.md
-│   └── anti-patterns.md
+│   ├── anti-patterns.md
+│   └── gmo-osint-public-claims-2026.md
 └── tests/
     ├── VALIDATOR_CHECKLIST.md
     ├── TEST_REPORT_v0.1.0.md
     ├── TEST_REPORT_v0.1.1-telecom.md
     ├── TEST_REPORT_v0.1.2-regression.md
-    └── TEST_REPORT_v0.1.5-corrections.md
+    ├── TEST_REPORT_v0.1.5-corrections.md
+    ├── TEST_REPORT_v0.1.7-osint.md
+    └── OSINT_BLIND_TEST_v0.1.7.md
 ```
 
 ## Modules
@@ -111,6 +116,12 @@ Separates parcel number, block number, basic number, residence number, building 
 
 Separates base terms, pricing tables, plan conditions, important-matters documents, FAQ/support, and marketing pages; decomposes ambiguous claims such as “unlimited”.
 
+### Defensive OSINT artifact correlation
+
+`modules/osint-artifact-correlation.md`
+
+Distinguishes public reports, source provenance, correlated artifact patterns, administrative accounts, operator claims and human attribution. Only sanitized, authorized/public evidence; never visit offender-controlled leak sites.
+
 ## Examples and anti-examples
 
 Good/real investigation cases:
@@ -119,6 +130,7 @@ Good/real investigation cases:
 - `examples/mobile-unlimited-jp-4carriers.md` — document function / unlimited decomposition
 - `examples/applecare-warranty-layers.md` — statutory remedy vs notice period vs limitation period vs commercial warranty; includes a documented self-correction
 - `examples/google-photos-unlimited.md` — cohort coexistence / quota counting vs retention / current-state vs permanence
+- `examples/gmo-osint-public-claims-2026.md` — public OSINT claim review; correlation ≠ proven account/operator/person, attribution Unresolved
 
 Compact failure examples:
 
@@ -138,6 +150,7 @@ Tested so far:
 6. warranty-layer case: AppleCare + Japanese Civil Code / EU directive; v0.1.4 factual overreach corrected in v0.1.5
 7. Google Photos storage sunset: cohort coexistence; permanence overreach corrected in v0.1.5
 8. old-law anchor verification: pre-2017 Civil Code full-text check resolved the "one year" folk claim's true source (former Art. 566(3) via former Art. 570) and rejected our own six-month hypothesis
+9. v0.1.7: safe public OSINT source-correlation review and eight **unrun** blind regression prompts; specific actor attribution remains Unresolved
 
 ## Contribution direction
 
@@ -152,6 +165,8 @@ Useful contributions include:
 - domain modules that avoid expanding the common core
 
 For now, prefer **one new domain module at a time**. Domain knowledge should live in modules unless repeated failures prove that the core itself needs to change.
+
+v0.1.7 adds one conditional OSINT module and attribution/source-independence checks **without changing the four-step fast path**. The fixture's expert review is complete; cross-model blind execution is pending and is not represented as a PASS.
 
 ## Status
 
