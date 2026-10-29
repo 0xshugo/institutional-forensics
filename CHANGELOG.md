@@ -2,6 +2,13 @@
 
 ## [0.1.7] - 2026-10-29
 
+### Execution update (same version)
+
+- GPT-6 generated and preserved T1–T8 answers; same-session, answer-key-exposed review: 8/8 expected case decisions, **not an independent blind evaluation**.
+- Added two positive-control scenarios T9/T10 (authenticated account binding and request-chain evidence) to catch the false-negative "always Unresolved" behavior; GPT-6 smoke responses match both expectations (2/2).
+- Stored raw answers separately from self-review; independently blinded Qwen/Codex/fresh-chat experiments remain outstanding.
+
+
 Defensive OSINT evidence-correlation patch based on a public account of the GMO / Onamae.com Desktop Cloud incident.
 
 ### Added
