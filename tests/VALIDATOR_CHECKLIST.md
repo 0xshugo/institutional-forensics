@@ -1,6 +1,6 @@
 # Institutional Forensics Validator Checklist
 
-Version: v0.1.6 (core: `SKILL.md` front matter / `README.md`)
+Version: v0.1.7 (core: `SKILL.md` front matter / `README.md`)
 
 Canonical validator and Definition of Done checklist for this skill. Other docs should link here instead of duplicating items.
 
