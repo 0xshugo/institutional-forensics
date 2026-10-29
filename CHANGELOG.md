@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.1.7] - 2026-10-29
+
+Defensive OSINT evidence-correlation patch based on a public account of the GMO / Onamae.com Desktop Cloud incident.
+
+### Added
+
+- `modules/osint-artifact-correlation.md`: conditional attribution ladder L0–L5; source independence, temporal provenance, spoof/copy/common-provider alternatives and safety boundaries
+- `examples/gmo-osint-public-claims-2026.md`: sanitized public-claims case distinguishing confirmed incident notices from unverified domain/log/metadata/identity inferences
+- `tests/OSINT_BLIND_TEST_v0.1.7.md`: eight synthetic adversarial prompts with withheld grading rubric; cross-model execution **not yet performed**
+- `tests/TEST_REPORT_v0.1.7-osint.md`: methodological evidence-structure review with explicit unresolved attribution and safe-source limits
+- conditional validator and anti-pattern rules against `correlation → attribution` and mirrored-source double counting
+
+### Changed
+
+- `SKILL.md` v0.1.7, README and CHANGELOG now route OSINT correlation cases into the domain module
+- Existing four-step core fast path unchanged; additional checks are activated only for identity/attribution cases
+
+### Caution
+
+GMO's official reporting asks the public not to access attack-controlled leak pages or independently investigate suspects. Only official notices, published summaries and technical standards were used. No underlying suspect logs/XLSX were independently verified; reported confidence percentages were not adopted.
+
+---
+
 ## [0.1.6] - 2026-09-17
 
 Old-law verification patch: resolved the pre-2017 anchor of the "one year" folk claim with primary-text evidence.
